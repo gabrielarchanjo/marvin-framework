@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Program Files/javacv-bin/javacv.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/javacv-bin/javacpp.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MarvinFramework"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Program Files/javacv-bin/jna-3.0.4.jar"/>
+	<classpathentry kind="lib" path="marvin/framework/lib/junit-4.7.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
