@@ -9,7 +9,9 @@ Discussion group:
 https://groups.google.com/forum/#!forum/marvin-project
 */
 
-package marvin.image;
+package marvin.color;
+
+import marvin.image.MarvinImage;
 
 /**
  * Image color model conversions.

@@ -14,6 +14,7 @@ package org.marvinproject.image.edge.prewitt;
 import marvin.gui.MarvinAttributesPanel;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
+import marvin.math.MarvinMath;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
@@ -41,6 +42,7 @@ public class Prewitt extends MarvinAbstractImagePlugin{
 	
 	public void load(){
 		convolution = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.convolution.jar");
+		setAttribute("intensity", 1.0);
 	}
 	
 	public MarvinAttributesPanel getAttributesPanel(){
@@ -56,10 +58,18 @@ public class Prewitt extends MarvinAbstractImagePlugin{
 		boolean previewMode
 	)
     {
-		convolution.setAttribute("matrix", matrixPrewittX);
-		convolution.process(imageIn, imageOut, null, mask, previewMode);
+		double intensity = (Double)getAttribute("intensity");
 		
-		convolution.setAttribute("matrix", matrixPrewittY);
-		convolution.process(imageIn, imageOut, null, mask, previewMode);
+		if(intensity == 1){
+			convolution.setAttribute("matrix", matrixPrewittX);
+			convolution.process(imageIn, imageOut, null, mask, previewMode);
+			convolution.setAttribute("matrix", matrixPrewittY);
+			convolution.process(imageIn, imageOut, null, mask, previewMode);
+		} else{
+			convolution.setAttribute("matrix", MarvinMath.scaleMatrix(matrixPrewittX, intensity));
+			convolution.process(imageIn, imageOut, null, mask, previewMode);
+			convolution.setAttribute("matrix", MarvinMath.scaleMatrix(matrixPrewittY, intensity));
+			convolution.process(imageIn, imageOut, null, mask, previewMode);
+		}
     }
 }

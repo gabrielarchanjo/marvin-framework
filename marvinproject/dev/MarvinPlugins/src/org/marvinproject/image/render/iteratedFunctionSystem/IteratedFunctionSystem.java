@@ -66,7 +66,7 @@ public class IteratedFunctionSystem extends MarvinAbstractImagePlugin{
 		Rule tempRule;
 		double point[] = {x0,y0};
 		
-		imageOut.clearImage(0xFFFFFFFF);
+		imageOut.clear(0xFFFFFFFF);
 		
 		for(int i=0; i<iterations; i++){
 			tempRule = getRule();

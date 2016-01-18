@@ -17,6 +17,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import marvin.color.MarvinColorModelConverter;
+
 /**
  * Image object with many operations. This class is the image
  * representation used for the other classes in the framework.
@@ -143,7 +145,11 @@ public class MarvinImage implements Cloneable {
 		}
 	}
 	
-	public void clearImage(int color){
+	public void clear(){
+		clear(0);
+	}
+	
+	public void clear(int color){
 		for(int y=0; y<height; y++){
 			for(int x=0; x<width; x++){
 				setIntColor(x,y,color);

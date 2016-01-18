@@ -20,7 +20,7 @@ import marvin.util.MarvinAttributes;
 
 /**
  * Gaussian blur implementation. This algorithm can be optimized in many ways.
- * @author Gabriel Ambrósio Archanjo
+ * @author Gabriel Ambrósio Archanjo, Martin Mihályi
  * @version 1.0 02/13/2008
  */
 public class GaussianBlur extends MarvinAbstractImagePlugin
@@ -35,6 +35,7 @@ public class GaussianBlur extends MarvinAbstractImagePlugin
 
 	double kernelMatrix[][];
 	double resultMatrix[][][];
+	double appiledkernelMatrix[][];
 	int radius;
 	public void load()
 	{
@@ -75,6 +76,7 @@ public class GaussianBlur extends MarvinAbstractImagePlugin
 		int l_pixelColor;
 		kernelMatrix = getGaussianKernel();
 		resultMatrix = new double[l_imageWidth][l_imageHeight][3];
+		appiledkernelMatrix = new double[l_imageWidth][l_imageHeight];
 		
 		boolean[][] l_arrMask = mask.getMaskArray();
 		performanceMeter.startEvent("Apply Kernel");
@@ -97,9 +99,9 @@ public class GaussianBlur extends MarvinAbstractImagePlugin
 				if(l_arrMask != null && !l_arrMask[x][y]){
 					continue;
 				}
-				resultMatrix[x][y][RED] = (short)(resultMatrix[x][y][0]%256);
-				resultMatrix[x][y][GREEN] = (short)(resultMatrix[x][y][1]%256);
-				resultMatrix[x][y][BLUE] = (short)(resultMatrix[x][y][2]%256);
+				resultMatrix[x][y][RED] = (short)((resultMatrix[x][y][0]/appiledkernelMatrix[x][y])%256);
+				resultMatrix[x][y][GREEN] = (short)((resultMatrix[x][y][1]/appiledkernelMatrix[x][y])%256);
+				resultMatrix[x][y][BLUE] = (short)((resultMatrix[x][y][2]/appiledkernelMatrix[x][y])%256);
 				imageOut.setIntColor(x,y,imageIn.getAlphaComponent(x, y), (int)resultMatrix[x][y][0], (int)resultMatrix[x][y][1], (int)resultMatrix[x][y][2]);
 			}
 			performanceMeter.incProgressBar();
@@ -141,10 +143,11 @@ public class GaussianBlur extends MarvinAbstractImagePlugin
 	{
 		for(int y=centerPixel_Y; y<centerPixel_Y+(radius*2); y++){
 			for(int x=centerPixel_X; x<centerPixel_X+(radius*2); x++){
-				if(x-radius >= 0 && x-radius < image.getWidth() && y-radius >=0 && y-radius < image.getHeight()){
+				if(x-radius >= 0 && x-radius < image.getWidth() && y-radius >= 0 && y-radius < image.getHeight()){
 					resultMatrix[x-radius][y-radius][RED]+= (((pixelColor & 0x00FF0000) >>> 16)*kernelMatrix[x-centerPixel_X][y-centerPixel_Y]);
 					resultMatrix[x-radius][y-radius][GREEN]+= (((pixelColor & 0x0000FF00) >>> 8)*kernelMatrix[x-centerPixel_X][y-centerPixel_Y]);
 					resultMatrix[x-radius][y-radius][BLUE]+= ((pixelColor & 0x000000FF)*kernelMatrix[x-centerPixel_X][y-centerPixel_Y]);
+					appiledkernelMatrix[x-radius][y-radius] += kernelMatrix[x-centerPixel_X][y-centerPixel_Y];
 				}
 			}
 			performanceMeter.stepsFinished(radius*2);

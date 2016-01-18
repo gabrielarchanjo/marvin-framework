@@ -22,7 +22,7 @@ import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
 import marvin.util.MarvinPluginLoader;
 
-public class HarrisCorner extends MarvinAbstractImagePlugin {
+public class Harris extends MarvinAbstractImagePlugin {
 
 	private MarvinImagePlugin gray;
 	@Override

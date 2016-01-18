@@ -348,11 +348,16 @@ public class MarvinPluginCollection {
 	  | PREWITT
 	  ==============================================================================================*/
 	public static void prewitt(MarvinImage imageIn, MarvinImage imageOut){
-		prewitt.process(imageIn, imageOut, MarvinImageMask.NULL_MASK);
+		prewitt(imageIn, imageOut, 1, MarvinImageMask.NULL_MASK);
 	}
 	
-	public static void prewitt(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
+	public static void prewitt(MarvinImage imageIn, MarvinImage imageOut, double intensity){
+		prewitt(imageIn, imageOut, intensity, MarvinImageMask.NULL_MASK);
+	}
+	
+	public static void prewitt(MarvinImage imageIn, MarvinImage imageOut, double intensity, MarvinImageMask mask){
 		prewitt = checkAndLoadImagePlugin(prewitt, "org.marvinproject.image.edge.prewitt");
+		prewitt.setAttribute("intensity", intensity);
 		prewitt.process(imageIn, imageOut, mask);
 	}
 	
@@ -360,7 +365,7 @@ public class MarvinPluginCollection {
 	  | ROBERTS
 	  ==============================================================================================*/
 	public static void roberts(MarvinImage imageIn, MarvinImage imageOut){
-		roberts.process(imageIn, imageOut, MarvinImageMask.NULL_MASK);
+		roberts(imageIn, imageOut, MarvinImageMask.NULL_MASK);
 	}
 	
 	public static void roberts(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
@@ -408,7 +413,7 @@ public class MarvinPluginCollection {
 	  | SOBEL
 	  ==============================================================================================*/
 	public static void sobel(MarvinImage imageIn, MarvinImage imageOut){
-		sobel.process(imageIn, imageOut, MarvinImageMask.NULL_MASK);
+		sobel(imageIn, imageOut, MarvinImageMask.NULL_MASK);
 	}
 	
 	public static void sobel(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){

@@ -24,9 +24,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import marvin.color.MarvinColorModelConverter;
 import marvin.gui.MarvinFilterWindow;
 import marvin.gui.MarvinImagePanel;
-import marvin.image.MarvinColorModelConverter;
 import marvin.image.MarvinImage;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;

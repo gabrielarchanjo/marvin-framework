@@ -79,7 +79,7 @@ public class Lindenmayer extends MarvinAbstractImagePlugin{
 		turtle.setStartPosition(0, 0, initialAngle);
 		turtle.setRotationAngle(rotationAngle);
 		
-		imageOut.clearImage(0xFFFFFFFF);
+		imageOut.clear(0xFFFFFFFF);
 		turtle.render(startText, grammar,iterations, imageOut);
 		
 	}

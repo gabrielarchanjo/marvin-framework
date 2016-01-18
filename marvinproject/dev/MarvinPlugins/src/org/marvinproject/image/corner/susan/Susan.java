@@ -22,14 +22,14 @@ import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
 import marvin.util.MarvinPluginLoader;
 
-public class SusanCorner extends MarvinAbstractImagePlugin {
+public class Susan extends MarvinAbstractImagePlugin {
 
 	private MarvinImagePlugin gray;
 	@Override
 	public void load() {
 		gray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale");
 		setAttribute("matrixSize", 7);
-		setAttribute("threshold", 50);
+		setAttribute("threshold", 100);
 	}
 
 	@Override
@@ -90,10 +90,10 @@ public class SusanCorner extends MarvinAbstractImagePlugin {
 	    //2. step
 	    //calculate usan values for every pixels
 	    //in every line
-	      for (int i = 0; i < height; i += 1)
+	      for (int i = 0; i < width; i += 1)
 	      {
 	    	  //in every row
-	         for (int j = 0; j < width; j += 1)
+	         for (int j = 0; j < height; j += 1)
 	         {
 	        	 int blockradius = matrixSize / 2;
 	        	 //resize the circle if it is too big
@@ -103,6 +103,7 @@ public class SusanCorner extends MarvinAbstractImagePlugin {
 	        	 if (j + blockradius > height - 1)blockradius = height - 1 - j;
 	        	      
 	        	 //define the nucleus
+
 	        	 int nucleusValue = tempImage.getIntComponent0(i, j);
 	        	 
 	        	 //iterating through the circle
@@ -127,10 +128,10 @@ public class SusanCorner extends MarvinAbstractImagePlugin {
 	      //find the corner points
 	      int max = 3 * USAN / 4;
 		    //in every line
-	      for (int i = 0; i < height; i += 1)
+	      for (int i = 0; i < width; i += 1)
 	      {
 	    	  //in every row
-	         for (int j = 0; j < width; j += 1)
+	         for (int j = 0; j < height; j += 1)
 	         {
 	        	 if(Math.abs(max - usan[i][j]) < 2)
 	        	 {

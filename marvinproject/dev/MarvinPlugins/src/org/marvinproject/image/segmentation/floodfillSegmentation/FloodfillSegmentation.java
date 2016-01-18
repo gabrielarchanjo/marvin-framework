@@ -9,6 +9,8 @@ import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
 import marvin.util.MarvinPluginLoader;
 
+import static marvin.MarvinPluginCollection.*;
+
 
 public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
 
@@ -34,7 +36,7 @@ public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
 	
 	private MarvinSegment[] floodfillSegmentation(MarvinImage image){
 		MarvinImage fillBuffer = image.clone();
-		fillBuffer.clearImage(0xFF000000);
+		fillBuffer.clear(0xFF000000);
 		
 		int currentColor=1;
 		for(int y=0; y<image.getHeight(); y++){
