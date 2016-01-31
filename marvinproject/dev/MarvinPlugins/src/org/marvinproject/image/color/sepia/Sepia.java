@@ -62,7 +62,7 @@ public class Sepia extends MarvinAbstractImagePlugin implements ChangeListener, 
 		
 		//performanceMeter.enableProgressBar("Filtro de Teste", ((height-2)*(width-2)));
 		
-		boolean[][] l_arrMask = mask.getMaskArray();
+		boolean[][] l_arrMask = mask.getMask();
 		
 		for (int x = 0; x < imageIn.getWidth(); x++) {
 			for (int y = 0; y < imageIn.getHeight(); y++) {

@@ -78,7 +78,7 @@ public class GaussianBlur extends MarvinAbstractImagePlugin
 		resultMatrix = new double[l_imageWidth][l_imageHeight][3];
 		appiledkernelMatrix = new double[l_imageWidth][l_imageHeight];
 		
-		boolean[][] l_arrMask = mask.getMaskArray();
+		boolean[][] l_arrMask = mask.getMask();
 		performanceMeter.startEvent("Apply Kernel");
 		for (int x = 0; x < l_imageWidth; x++) {
 			for (int y = 0; y < l_imageHeight; y++) {	

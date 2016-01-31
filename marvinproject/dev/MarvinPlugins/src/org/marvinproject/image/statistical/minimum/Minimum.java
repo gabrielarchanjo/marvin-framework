@@ -61,7 +61,7 @@ public class Minimum extends MarvinAbstractImagePlugin {
 		performanceMeter.enableProgressBar("Minimum Filter" ,a_imageIn.getWidth() *  a_imageIn.getHeight() );
 		performanceMeter.startEvent("Minimum Filter");
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {

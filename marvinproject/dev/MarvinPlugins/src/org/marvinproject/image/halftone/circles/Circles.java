@@ -87,7 +87,7 @@ public class Circles extends MarvinAbstractImagePlugin
 		
 		performanceMeter.enableProgressBar("Halftone - Circles" , (a_imageIn.getHeight()/(circleWidth+circlesDistance))*(a_imageIn.getWidth()/(circleWidth+circlesDistance)));
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		int l_dif=0;
 		for (int y = 0; y < a_imageIn.getHeight(); y+=circleWidth+circlesDistance) {

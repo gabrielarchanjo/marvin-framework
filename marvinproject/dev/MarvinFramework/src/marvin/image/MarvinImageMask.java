@@ -45,10 +45,6 @@ public class MarvinImageMask {
 		arrMask = mask;
 		width = arrMask[0].length;
 		height = arrMask.length;
-		
-		System.out.println("width:"+width);
-		System.out.println("height:"+height);
-		
 	}
 	
 	/**
@@ -74,11 +70,25 @@ public class MarvinImageMask {
 	}
 	
 	/**
+	 * @return width
+	 */
+	public int getWidth(){
+		return width;
+	}
+	
+	/**
+	 * @return height;
+	 */
+	public int getHeight(){
+		return height;
+	}
+	
+	/**
 	 * Add a point to the mask.
 	 * @param x
 	 * @param y
 	 */
-	public void addPoint(int x, int y){
+	public void addPixel(int x, int y){
 		arrMask[x][y] = true;
 	}
 	
@@ -87,7 +97,7 @@ public class MarvinImageMask {
 	 * @param x
 	 * @param y
 	 */
-	public void removePoint(int x, int y){
+	public void removePixel(int x, int y){
 		arrMask[x][y] = false;
 	}
 	
@@ -107,7 +117,7 @@ public class MarvinImageMask {
 	/**
 	 * @return	Mask Array.
 	 */
-	public boolean[][] getMaskArray(){
+	public boolean[][] getMask(){
 		return arrMask;
 	}
 	

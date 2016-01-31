@@ -31,10 +31,7 @@ public class BoundaryFill extends MarvinAbstractImagePlugin{
 		setAttribute("y", 0);
 		setAttribute("color", Color.red.getRGB());
 		setAttribute("tile", null);
-		setAttribute("image", null);
 		setAttribute("threshold", 0);
-		
-		
 	}
 
 	@Override

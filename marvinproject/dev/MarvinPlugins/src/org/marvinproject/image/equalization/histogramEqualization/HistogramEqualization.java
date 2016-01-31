@@ -29,7 +29,7 @@ public class HistogramEqualization extends MarvinAbstractImagePlugin{
 		boolean preview
 	) {
 		
-		boolean[][] bmask = mask.getMaskArray();
+		boolean[][] bmask = mask.getMask();
 		
 		// histogram
 		int[] histRed = new int[256];

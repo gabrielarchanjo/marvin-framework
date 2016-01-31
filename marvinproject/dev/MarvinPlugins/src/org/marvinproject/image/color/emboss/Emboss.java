@@ -39,7 +39,7 @@ public class Emboss extends MarvinAbstractImagePlugin
 		boolean a_previewMode
 	)
 	{
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int x = 0; x < a_imageIn.getWidth(); x++) {
 			for (int y = 0; y < a_imageIn.getHeight(); y++) {

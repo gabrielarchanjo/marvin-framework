@@ -47,7 +47,7 @@ public class GrayScale extends MarvinAbstractImagePlugin
 	)
 	{
 		// Mask
-		boolean[][] l_arrMask = mask.getMaskArray();
+		boolean[][] l_arrMask = mask.getMask();
 		
 		performanceMeter.start("Gray");
 		performanceMeter.startEvent("Gray");

@@ -62,7 +62,7 @@ public class Maximum extends MarvinAbstractImagePlugin {
 		performanceMeter.enableProgressBar("Maximum Filter" ,a_imageIn.getWidth() *  a_imageIn.getHeight() );
 		performanceMeter.startEvent("Maximum Filter");
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {

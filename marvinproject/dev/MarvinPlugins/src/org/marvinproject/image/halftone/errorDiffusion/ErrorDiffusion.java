@@ -63,7 +63,7 @@ public class ErrorDiffusion extends MarvinAbstractImagePlugin
 		performanceMeter.enableProgressBar("Halftone - Error Diffusion", a_imageOut.getHeight()*a_imageOut.getWidth());
 		performanceMeter.startEvent("Error Diffusion");
 
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int y = 0; y < a_imageOut.getHeight(); y++) {
 			for (int x = 0; x < a_imageOut.getWidth(); x++) {

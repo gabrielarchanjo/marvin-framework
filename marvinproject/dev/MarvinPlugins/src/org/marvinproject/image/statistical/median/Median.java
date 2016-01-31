@@ -61,7 +61,7 @@ public class Median extends MarvinAbstractImagePlugin {
 		performanceMeter.enableProgressBar("Median Filter" ,a_imageIn.getWidth() *  a_imageIn.getHeight() );
 		performanceMeter.startEvent("Median Filter");
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {

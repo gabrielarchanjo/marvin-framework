@@ -52,7 +52,7 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 		colorRange = (Integer)attributes.get("colorRange");
 		colorRGB = ((Color)attributes.get("differenceColor")).getRGB();
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		int total=0;
 		for(int y=0; y<a_imageIn.getHeight(); y++){
 			for(int x=0; x<a_imageIn.getWidth(); x++){

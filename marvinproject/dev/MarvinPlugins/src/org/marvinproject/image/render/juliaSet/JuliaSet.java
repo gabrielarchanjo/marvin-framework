@@ -78,7 +78,7 @@ public class JuliaSet extends MarvinAbstractImagePlugin{
 		double nx1;
 		double ny1;
 		
-		boolean[][] mask = a_mask.getMaskArray();
+		boolean[][] mask = a_mask.getMask();
 		
 		for (int i=0; i < height; i++) {
 			for (int j = 0; j < width; j++) {

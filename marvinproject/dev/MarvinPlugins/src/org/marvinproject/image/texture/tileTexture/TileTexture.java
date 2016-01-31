@@ -62,7 +62,7 @@ public class TileTexture extends MarvinAbstractImagePlugin{
     	int tileWidth = tile.getWidth();
     	int tileHeight = tile.getHeight();
     	
-    	boolean[][] arrMask = mask.getMaskArray();
+    	boolean[][] arrMask = mask.getMask();
     	if(arrMask != null){
     		MarvinImage.copyColorArray(imgIn, imgOut);
     	}

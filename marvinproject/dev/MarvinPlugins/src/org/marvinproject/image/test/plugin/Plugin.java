@@ -76,7 +76,7 @@ public class Plugin extends MarvinAbstractImagePlugin implements ChangeListener,
 		int width  = a_imageIn.getWidth();
 		int height = a_imageIn.getHeight();
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {

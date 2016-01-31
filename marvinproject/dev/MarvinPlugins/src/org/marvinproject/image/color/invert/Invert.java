@@ -39,7 +39,7 @@ public class Invert extends MarvinAbstractImagePlugin
 		boolean previewMode
 	)
 	{
-		boolean[][] l_arrMask = mask.getMaskArray();
+		boolean[][] l_arrMask = mask.getMask();
 		
 		int r, g, b;
 		for (int x = 0; x < imageIn.getWidth(); x++) {

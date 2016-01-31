@@ -7,14 +7,32 @@ public class MarvinColor {
 
 	public int		id;
 	public String	name; 
-	public int 		r,g,b;
+	public int 		red,green,blue;
 	
+	/**
+	 * Constructor for developer created colors
+	 * @param r
+	 * @param g
+	 * @param b
+	 */
+	public MarvinColor(int r, int g, int b){
+		this(-1, null, r, g, b);
+	}
+	
+	/**
+	 * Constructor for predefined colors 
+	 * @param id
+	 * @param name
+	 * @param r
+	 * @param g
+	 * @param b
+	 */
 	public MarvinColor(int id, String name, int r, int g, int b){
 		this.id = id;
 		this.name = name;
-		this.r = r;
-		this.g = g;
-		this.b = b;
+		this.red = r;
+		this.green = g;
+		this.blue = b;
 	}
 	
 	public static MarvinColor getColorById(Integer id){

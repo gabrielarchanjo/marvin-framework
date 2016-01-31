@@ -72,7 +72,7 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 		
 		pluginGray.process(imageIn, imageOut, attributesOut, mask, previewMode);
 		
-		boolean[][] bmask = mask.getMaskArray();
+		boolean[][] bmask = mask.getMask();
 		
 		if(neighborhood == -1 && range == -1){
 			hardThreshold(imageIn, imageOut, bmask);

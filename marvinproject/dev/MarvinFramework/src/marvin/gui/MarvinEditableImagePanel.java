@@ -123,7 +123,7 @@ public class MarvinEditableImagePanel extends MarvinImagePanel implements Runnab
 	}
 	
 	private void deleteSelected(){
-		boolean[][] mask = imageMask.getMaskArray();
+		boolean[][] mask = imageMask.getMask();
 		for(int y=0; y<image.getHeight(); y++){
 			for(int x=0; x<image.getWidth(); x++){
 				if(!mask[x][y]){

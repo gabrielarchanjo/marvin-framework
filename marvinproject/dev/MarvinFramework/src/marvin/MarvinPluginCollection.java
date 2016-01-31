@@ -26,7 +26,7 @@ public class MarvinPluginCollection {
 										floodfillSegmentation,
 										gaussianBlur,
 										grayScale,
-										grayScaleQuantization,
+										harris,
 										histogramEqualization,
 										halftoneCircles,
 										halftoneDithering,
@@ -38,10 +38,6 @@ public class MarvinPluginCollection {
 										juliaSet,
 										lindenmayer,
 										mandelbrot,
-										statisticalMaximum,
-										statisticalMedian,
-										statisticalMinimum,
-										statisticalMode,
 										mergePhotos,
 										moravec,
 										morphologicalBoundary,
@@ -49,19 +45,27 @@ public class MarvinPluginCollection {
 										morphologicalDilation,
 										morphologicalErosion,
 										morphologicalOpening,
+										mosaic,
 										pixelize,
 										prewitt,
+										quantizationGrayScale,
 										roberts,
 										rotate,
 										scale,
 										sobel,
 										skew,
 										sepia,
+										statisticalMaximum,
+										statisticalMedian,
+										statisticalMinimum,
+										statisticalMode,
 										subtract,
+										susan,
 										skinColorDetection,
 										television,
 										tileTexture,
-										thresholding;
+										thresholding,
+										watershed;
 	
 	/*==============================================================================================
 	  | BLACK AND WHITE
@@ -78,6 +82,27 @@ public class MarvinPluginCollection {
 		blackAndWhite = checkAndLoadImagePlugin(blackAndWhite, "org.marvinproject.image.color.blackAndWhite");
 		blackAndWhite.setAttribute("level", level);
 		blackAndWhite.process(imageIn, imageOut, mask);
+	}
+	
+	/*==============================================================================================
+	  | BRIGHTNESS AND CONTRAST
+	  ==============================================================================================*/
+	public static void boundaryFill(MarvinImage imageIn, MarvinImage imageOut, int x, int y, Color color){
+		boundaryFill(imageIn, imageOut, x, y, color, null, 0);
+	}
+	
+	public static void boundaryFill(MarvinImage imageIn, MarvinImage imageOut, int x, int y, Color color, int threshold){
+		boundaryFill(imageIn, imageOut, x, y, color, null, threshold);
+	}
+	
+	public static void boundaryFill(MarvinImage imageIn, MarvinImage imageOut, int x, int y, Color color, MarvinImage tile, int threshold){
+		boundaryFill = checkAndLoadImagePlugin(boundaryFill, "org.marvinproject.image.fill.boundaryFill");
+		boundaryFill.setAttribute("x", x);
+		boundaryFill.setAttribute("y", y);
+		boundaryFill.setAttribute("color", color);
+		boundaryFill.setAttribute("tile", tile);
+		boundaryFill.setAttribute("threshold", 0);
+		boundaryFill.process(imageIn, imageOut);
 	}
 	
 	/*==============================================================================================
@@ -151,6 +176,18 @@ public class MarvinPluginCollection {
 	}
 	
 	/*==============================================================================================
+	  | CROP
+	  ==============================================================================================*/
+	public static void crop(MarvinImage imageIn, MarvinImage imageOut, int x, int y, int width, int height){
+		crop = checkAndLoadImagePlugin(crop, "org.marvinproject.image.segmentation.crop");
+		crop.setAttribute("x", 0);
+		crop.setAttribute("y", 0);
+		crop.setAttribute("width", 0);
+		crop.setAttribute("height", 0);
+		crop.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
 	  | DETERMINE SCENE BACKGROUND
 	  ==============================================================================================*/
 	public static void determineSceneBackground(List<MarvinImage> images, MarvinImage imageOut, int threshold){
@@ -172,10 +209,19 @@ public class MarvinPluginCollection {
 	}
 	
 	/*==============================================================================================
+	  | FLIP
+	  ==============================================================================================*/	
+	public static void flip(MarvinImage imageIn, MarvinImage imageOut, String direction){
+		flip = checkAndLoadImagePlugin(flip, "org.marvinproject.image.transform.flip");
+		flip.setAttribute("flip", direction);
+		flip.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
 	  | FLOODFILL SEGMENTATION
 	  ==============================================================================================*/	
 	public static MarvinSegment[] floodfillSegmentation(MarvinImage imageIn){
-		floodfillSegmentation = checkAndLoadImagePlugin(emboss, "org.marvinproject.image.segmentation.floodfillSegmentation");
+		floodfillSegmentation = checkAndLoadImagePlugin(floodfillSegmentation, "org.marvinproject.image.segmentation.floodfillSegmentation");
 		MarvinAttributes output = new MarvinAttributes();
 		floodfillSegmentation.process(imageIn, null, output);
 		return (MarvinSegment[])output.get("segments");
@@ -247,6 +293,25 @@ public class MarvinPluginCollection {
 	public static void halftoneRaylanders(MarvinImage imageIn, MarvinImage imageOut){
 		halftoneRylanders = checkAndLoadImagePlugin(halftoneRylanders, "org.marvinproject.image.halftone.rylanders");
 		halftoneRylanders.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
+	  | HARRIS CORNER
+	  ==============================================================================================*/
+	public static void harrisCorner(MarvinImage imageIn, int matrixSize, int threshold, double k){
+		harris = checkAndLoadImagePlugin(harris, "org.marvinproject.image.corner.harris");
+		harris.setAttribute("matrixSize", matrixSize);
+		harris.setAttribute("threshold", threshold);
+		harris.setAttribute("k", k);
+		harris.process(imageIn, imageIn);
+	}
+	
+	/*==============================================================================================
+	  | HISTOGRAM EQUALIZATION
+	  ==============================================================================================*/
+	public static void histogramEqualization(MarvinImage imageIn, MarvinImage imageOut){
+		histogramEqualization = checkAndLoadImagePlugin(histogramEqualization, "org.marvinproject.image.equalization.histogramEqualization");
+		histogramEqualization.process(imageIn, imageOut);
 	}
 	
 	/*==============================================================================================
@@ -332,6 +397,17 @@ public class MarvinPluginCollection {
 	}
 	
 	/*==============================================================================================
+	  | MOSAIC
+	  ==============================================================================================*/
+	public static void mosaic(MarvinImage imageIn, MarvinImage imageOut, String shape, int width, boolean border){
+		mosaic = checkAndLoadImagePlugin(mosaic, "org.marvinproject.image.artistic.mosaic");
+		mosaic.setAttribute("shape", shape);
+		mosaic.setAttribute("width", width);
+		mosaic.setAttribute("border", border);
+		mosaic.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
 	  | PIXELIZE
 	  ==============================================================================================*/
 	public static void pixelize(MarvinImage imageIn, MarvinImage imageOut, int squareSide){
@@ -362,6 +438,15 @@ public class MarvinPluginCollection {
 	}
 	
 	/*==============================================================================================
+	  | QUANTIZATION GRAY SCALE
+	  ==============================================================================================*/
+	public static void quantizationGrayScale(MarvinImage imageIn, MarvinImage imageOut, int shades){
+		quantizationGrayScale = checkAndLoadImagePlugin(quantizationGrayScale, "org.marvinproject.image.quantization.grayScaleQuantization");
+		quantizationGrayScale.setAttributes("shades", shades);
+		quantizationGrayScale.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
 	  | ROBERTS
 	  ==============================================================================================*/
 	public static void roberts(MarvinImage imageIn, MarvinImage imageOut){
@@ -387,7 +472,7 @@ public class MarvinPluginCollection {
 		int cWidth = imageIn.getWidth();
 		int cHeight = imageIn.getHeight();
 		double cFactor = (double)cHeight/cWidth;
-		int newHeight= (int)(cFactor*width);
+		int newHeight= (int)Math.ceil(cFactor*width);
 		scale(imageIn, imageOut, width, newHeight);
 	}
 	
@@ -437,6 +522,15 @@ public class MarvinPluginCollection {
 		skinColorDetection.process(imageIn, imageOut, mask);
 	}
 	
+	/*==============================================================================================
+	  | SUSAN CORNER
+	  ==============================================================================================*/
+	public static void susanCorner(MarvinImage imageIn, int matrixSize, int threshold){
+		susan = checkAndLoadImagePlugin(susan, "org.marvinproject.image.corner.susan");
+		susan.setAttribute("matrixSize", matrixSize);
+		susan.setAttribute("threshold", threshold);
+		susan.process(imageIn, imageIn);
+	}
 	
 	/*==============================================================================================
 	  | TELEVISION
@@ -471,6 +565,15 @@ public class MarvinPluginCollection {
 		thresholding.process(imageIn, imageOut, mask);
 	}
 	
+	/*==============================================================================================
+	  | WATERSHED
+	  ==============================================================================================*/
+	public static int[][] watershed(MarvinImage imageIn){
+		watershed = checkAndLoadImagePlugin(watershed, "org.marvinproject.image.transform.watershed");
+		MarvinAttributes attr = new MarvinAttributes();
+		thresholding.process(imageIn, imageIn, attr);
+		return (int[][])attr.get("labels");
+	}
 	
 	private static MarvinImagePlugin checkAndLoadImagePlugin(MarvinImagePlugin ref, String pluginCanonicalName){
 		// Plug-in already loaded
@@ -479,5 +582,4 @@ public class MarvinPluginCollection {
 		}
 		return MarvinPluginLoader.loadImagePlugin(pluginCanonicalName);
 	}
-	
 }

@@ -52,7 +52,7 @@ public class EdgeDetector extends MarvinAbstractImagePlugin {
     	// Image size
         int width = a_imageIn.getWidth();
         int height = a_imageIn.getHeight();
-        boolean[][] mask = a_mask.getMaskArray();
+        boolean[][] mask = a_mask.getMask();
         //System.out.println("time:"+(System.currentTimeMillis()-time));
 
         performanceMeter.start("EdgeDetector");

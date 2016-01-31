@@ -55,7 +55,7 @@ public class Pixelize extends MarvinAbstractImagePlugin
 		int l_rgb;
 		
 		int squareSide = (Integer)attributes.get("squareSide");
-		arrMask = mask.getMaskArray();
+		arrMask = mask.getMask();
 			
 		for (int x = 0; x < imageIn.getWidth(); x+=squareSide) {
 			for (int y = 0; y < imageIn.getHeight(); y+=squareSide) {				

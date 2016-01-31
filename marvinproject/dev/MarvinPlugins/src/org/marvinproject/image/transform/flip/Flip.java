@@ -58,7 +58,7 @@ public class Flip extends MarvinAbstractImagePlugin
 	)
 	{
 		String l_operation = (String)attributes.get("flip");
-		arrMask = a_mask.getMaskArray();
+		arrMask = a_mask.getMask();
 		
 		if(l_operation.equals(HORIZONTAL)){
 			flipHorizontal(a_imageIn, a_imageOut);

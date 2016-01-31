@@ -55,7 +55,7 @@ public class Dithering extends MarvinAbstractImagePlugin
 		MarvinImagePlugin l_filter = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
 		l_filter.process(a_imageIn, a_imageIn, a_attributesOut, a_mask, a_previewMode);
 		
-		boolean[][] l_arrMask = a_mask.getMaskArray();
+		boolean[][] l_arrMask = a_mask.getMask();
 		
 		for (int x = 0; x < a_imageIn.getWidth(); x+=DOT_AREA) {
 			for (int y = 0; y < a_imageIn.getHeight(); y+=DOT_AREA) {
