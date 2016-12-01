@@ -22,6 +22,8 @@ public class MarvinPluginCollection {
 										crop,
 										determineSceneBackground,
 										emboss,
+										findSubimage,
+										findTextRegions,
 										flip,
 										floodfillSegmentation,
 										gaussianBlur,
@@ -179,11 +181,22 @@ public class MarvinPluginCollection {
 	  | CROP
 	  ==============================================================================================*/
 	public static void crop(MarvinImage imageIn, MarvinImage imageOut, int x, int y, int width, int height){
+		
+		x = Math.min(Math.max(x, 0), imageIn.getWidth());
+		y = Math.min(Math.max(y, 0), imageIn.getHeight());
+		
+		if(x + width > imageIn.getWidth()){
+			width = imageIn.getWidth() - x;
+		}
+		if(y + height > imageIn.getHeight()){
+			height = imageIn.getHeight() - y;
+		}
+		
 		crop = checkAndLoadImagePlugin(crop, "org.marvinproject.image.segmentation.crop");
-		crop.setAttribute("x", 0);
-		crop.setAttribute("y", 0);
-		crop.setAttribute("width", 0);
-		crop.setAttribute("height", 0);
+		crop.setAttribute("x", x);
+		crop.setAttribute("y", y);
+		crop.setAttribute("width", width);
+		crop.setAttribute("height", height);
 		crop.process(imageIn, imageOut);
 	}
 	
@@ -194,6 +207,57 @@ public class MarvinPluginCollection {
 		determineSceneBackground = checkAndLoadImagePlugin(determineSceneBackground, "org.marvinproject.image.background.determineSceneBackground");
 		determineSceneBackground.setAttribute("threshold", threshold);
 		determineSceneBackground.process(images, imageOut);	
+	}
+	
+	/*==============================================================================================
+	  | FIND SUBIMAGE
+	  ==============================================================================================*/
+	public static List<MarvinSegment> findAllSubimages(MarvinImage subimage, MarvinImage original){
+		return findAllSubimages(subimage, original, 1.0);
+	}
+	
+	public static List<MarvinSegment> findAllSubimages(MarvinImage subimage, MarvinImage original, double similarity){
+		findSubimage = checkAndLoadImagePlugin(flip, "org.marvinproject.image.pattern.findSubimage");
+		findSubimage.setAttribute("subimage", subimage);
+		findSubimage.setAttribute("similarity", similarity);
+		MarvinAttributes output = new MarvinAttributes();
+		findSubimage.process(original, null, output);
+		return (List<MarvinSegment>)output.get("matches");
+	}
+	
+	public static MarvinSegment findSubimage(MarvinImage subimage, MarvinImage original, int startX, int startY){
+		return findSubimage(subimage, original, startX, startY, 1.0);
+	}
+	
+	public static MarvinSegment findSubimage(MarvinImage subimage, MarvinImage original, int startX, int startY, double similarity){
+		findSubimage = checkAndLoadImagePlugin(flip, "org.marvinproject.image.pattern.findSubimage");
+		findSubimage.setAttribute("subimage", subimage);
+		findSubimage.setAttribute("similarity", similarity);
+		findSubimage.setAttribute("findAll", false);
+		findSubimage.setAttribute("startX", startX);
+		findSubimage.setAttribute("startY", startY);
+		MarvinAttributes output = new MarvinAttributes();
+		findSubimage.process(original, null, output);
+		
+		List<MarvinSegment> ret =  (List<MarvinSegment>)output.get("matches");
+		if(ret.size() > 0){
+			return ret.get(0);
+		}
+		return null;
+	}
+	
+	/*==============================================================================================
+	  | FIND TEXT REGIONS
+	  ==============================================================================================*/
+	public static List<MarvinSegment> findTextRegions(MarvinImage imageIn, int maxWhiteSpace, int maxFontLineWidth, int minTextWidth, int grayScaleThreshold){
+		findTextRegions = checkAndLoadImagePlugin(findTextRegions, "org.marvinproject.image.pattern.findTextRegions");
+		findTextRegions.setAttribute("maxWhiteSpace", maxWhiteSpace);
+		findTextRegions.setAttribute("maxFontLineWidth", maxFontLineWidth);
+		findTextRegions.setAttribute("minTextWidth", minTextWidth);
+		findTextRegions.setAttribute("grayScaleThreshold", grayScaleThreshold);
+		MarvinAttributes output = new MarvinAttributes();
+		findTextRegions.process(imageIn, null, output);
+		return (List<MarvinSegment>)output.get("matches");
 	}
 	
 	/*==============================================================================================
@@ -342,13 +406,13 @@ public class MarvinPluginCollection {
 	/*==============================================================================================
 	  | MORAVEC
 	  ==============================================================================================*/
-	public static MarvinAttributes moravec(MarvinImage imageIn, MarvinImage imageOut, int matrixSize, int threshold){
+	public static int[][] moravec(MarvinImage imageIn, MarvinImage imageOut, int matrixSize, int threshold){
 		moravec = checkAndLoadImagePlugin(moravec, "org.marvinproject.image.corner.moravec");
 		moravec.setAttribute("matrixSize", matrixSize);
 		moravec.setAttribute("threshold", threshold);
 		MarvinAttributes ret = new MarvinAttributes();
 		moravec.process(imageIn, imageOut, ret);
-		return ret;
+		return (int[][])ret.get("cornernessMap");
 	}
 	
 	/*==============================================================================================

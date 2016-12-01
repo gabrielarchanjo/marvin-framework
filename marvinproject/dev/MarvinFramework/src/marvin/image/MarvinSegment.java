@@ -15,13 +15,17 @@ public class MarvinSegment {
 	public int mass;
 
 	public MarvinSegment(){
-		this.x1 = -1;
-		this.x2 = -1;
-		this.y1 = -1;
-		this.y2 = -1;
-		this.width = -1;
-		this.height = -1;
-		this.mass = 0;
+		this(-1,-1,-1,-1);
+	}
+	
+	public MarvinSegment(int x1, int y1, int x2, int y2){
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+		this.width = x2-x1;
+		this.height = y2-y1;
+		this.mass = this.width*this.height;
 	}
 
 	public String toString(){

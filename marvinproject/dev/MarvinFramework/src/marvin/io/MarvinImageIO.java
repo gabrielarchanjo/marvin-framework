@@ -40,7 +40,7 @@ public class MarvinImageIO {
 	public static MarvinImage loadImage(String a_filePath){
 		MarvinImage l_marvinImage = null;
 		BufferedImage l_bufferedImage=null;
-		ImageInputStream l_imageInputStream;
+		ImageInputStream l_imageInputStream = null;
 		
 		//1. Load File
 		File l_file = new File(a_filePath);
@@ -69,6 +69,10 @@ public class MarvinImageIO {
 			
 			//MarvinErrorHandler.handle(, e);
 			//return null;
+		} finally{
+			if(l_imageInputStream != null){
+				try{	l_imageInputStream.close();	}catch(Exception e){/*nothing to do */};
+			}
 		}
 		
 		// 4. Get format

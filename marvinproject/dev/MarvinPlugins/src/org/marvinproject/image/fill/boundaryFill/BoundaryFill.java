@@ -29,7 +29,7 @@ public class BoundaryFill extends MarvinAbstractImagePlugin{
 	public void load() {
 		setAttribute("x", 0);
 		setAttribute("y", 0);
-		setAttribute("color", Color.red.getRGB());
+		setAttribute("color", Color.red);
 		setAttribute("tile", null);
 		setAttribute("threshold", 0);
 	}
@@ -64,7 +64,8 @@ public class BoundaryFill extends MarvinAbstractImagePlugin{
     	int targetRed = imgIn.getIntComponent0(x, y);
     	int targetGreen = imgIn.getIntComponent1(x, y);
     	int targetBlue = imgIn.getIntComponent2(x, y);
-    	int newColor = (Integer)getAttribute("color");
+    	Color color = (Color)getAttribute("color");
+    	int newColor = color.getRGB();
     	
     	boolean fillMask[][] = new boolean[imgOut.getWidth()][imgOut.getHeight()];
     	fillMask[x][y] = true;

@@ -1,5 +1,7 @@
 package org.marvinproject.image.segmentation.floodfillSegmentation;
 
+import java.awt.Color;
+
 import marvin.gui.MarvinAttributesPanel;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
@@ -8,8 +10,6 @@ import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
 import marvin.util.MarvinPluginLoader;
-
-import static marvin.MarvinPluginCollection.*;
 
 
 public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
@@ -45,9 +45,10 @@ public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
 				int color = fillBuffer.getIntColor(x, y);
 				
 				if((color & 0x00FFFFFF) == 0){
+					Color c = new Color(0xFF000000 | (currentColor++));
 					floodfill.setAttribute("x", x);
 					floodfill.setAttribute("y", y);
-					floodfill.setAttribute("color", 0xFF000000 | (currentColor++));
+					floodfill.setAttribute("color", c);
 					floodfill.process(image, fillBuffer);
 					
 				}

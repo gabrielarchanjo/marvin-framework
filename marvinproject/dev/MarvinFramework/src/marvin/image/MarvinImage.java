@@ -1,6 +1,6 @@
 /**
-Marvin Project <2007-2013>
-http://www.marvinproject.org
+Marvin Project <2007-2016>
+http://marvinproject.sourceforge.net/
 
 License information:
 http://marvinproject.sourceforge.net/en/license.html
@@ -261,6 +261,17 @@ public class MarvinImage implements Cloneable {
 	 */
 	public int getIntColor(int x, int y){
 		return arrIntColor[y*width+x];
+	}
+	
+	/**
+	 * @param x
+	 * @param y
+	 * @param alpha
+	 */
+	public void setAlphaComponent(int x, int y, int alpha){
+		int color = arrIntColor[((y*width+x))];
+		color = alpha << 24 + (color & 0x00FFFFFF);
+		arrIntColor[((y*width+x))] = color;
 	}
 	
 	/**

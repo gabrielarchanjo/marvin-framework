@@ -69,7 +69,9 @@ public class Scale extends MarvinAbstractImagePlugin{
 			newWidth = (Integer)attributes.get("newWidth");
 			newHeight = (Integer)attributes.get("newHeight");
 			
-			a_imageOut.setDimension(newWidth, newHeight);
+			if(a_imageOut.getWidth() != newWidth || a_imageOut.getHeight() != newHeight){
+				a_imageOut.setDimension(newWidth, newHeight);
+			}
 			
 		    int x_ratio = (int)((width<<16)/newWidth) ;
 		    int y_ratio = (int)((height<<16)/newHeight) ;

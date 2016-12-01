@@ -28,6 +28,7 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 	private MarvinAttributesPanel	attributesPanel;
 	private MarvinAttributes		attributes;
 	private int 					threshold,
+									thresholdRange,
 									neighborhood,
 									range;
 	
@@ -38,6 +39,7 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 		// Attributes
 		attributes = getAttributes();
 		attributes.set("threshold", 125);
+		attributes.set("thresholdRange", -1);
 		attributes.set("neighborhood", -1);
 		attributes.set("range", -1);
 		
@@ -67,8 +69,13 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 	)
 	{
 		threshold = (Integer)attributes.get("threshold");
+		thresholdRange = (Integer)attributes.get("thresholdRange");
 		neighborhood = (Integer)attributes.get("neighborhood");
 		range = (Integer)attributes.get("range");
+		
+		if(thresholdRange == -1){
+			thresholdRange = 255-threshold;
+		}
 		
 		pluginGray.process(imageIn, imageOut, attributesOut, mask, previewMode);
 		
@@ -90,7 +97,8 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 					continue;
 				}
 				
-				if(imageIn.getIntComponent0(x,y) < threshold){
+				int gray = imageIn.getIntComponent0(x,y); 
+				if(gray < threshold || gray > threshold+thresholdRange){
 					imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x,y), 0,0,0);
 				}
 				else{

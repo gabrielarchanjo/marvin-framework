@@ -12,6 +12,7 @@ https://groups.google.com/forum/#!forum/marvin-project
 package marvin.video;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.nio.ByteBuffer;
 
 import marvin.image.MarvinImage;
@@ -23,8 +24,12 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 	
+	//OpenCVFrameConverter.ToIplImage converterToIpl = new OpenCVFrameConverter.ToIplImage();
+	//Java2DFrameConverter paintConverter = new Java2DFrameConverter();
+	
 	private FrameGrabber	grabber;
 	private IplImage		image;
+	//Mat						image;
 	private int				width;
 	private int				height;
 	private boolean			connected;
@@ -66,13 +71,18 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 	public void loadResource(String path) throws MarvinVideoInterfaceException{
 		mode = MODE.FILE;
 		try{
-			grabber= new OpenCVFrameGrabber(path);
-			grabber.setImageWidth(width);
-			grabber.setImageHeight(height);
+			grabber= OpenCVFrameGrabber.createDefault(new File(path));
+			//grabber = new OpenCVFrameGrabber(new File(path));
+			//grabber = new FFmpegFrameGrabber(new File(path));
+			//grabber.setImageWidth(width);
+			//grabber.setImageHeight(height);
 			grabber.start();
 			BufferedImage bufImage = grabber.grab().getBufferedImage();
+			//image = converterToIpl.convert(grabber.grab());
 			this.width = bufImage.getWidth();
 			this.height = bufImage.getHeight();
+			//this.width = image.width();
+			//this.height = image.height();
 			marvinImage = new MarvinImage(width, height);
 			intArray = new int[height*width*4];
 			connected = true;
@@ -103,11 +113,14 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 		return this.height;
 	}
 	
+	int frame=1;
 	@Override
+	
 	public MarvinImage getFrame() throws MarvinVideoInterfaceException{
 		
 		if(connected){
 			image=null;
+			
 			try
 			{
 				if(mode == MODE.DEVICE || grabber.getFrameNumber() < grabber.getLengthInFrames()-1){
@@ -130,6 +143,7 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 			arr[ii] = 0xFF000000 + (buffer.get(bi+2) << 16) + (buffer.get(bi+1) << 8) + buffer.get(bi);
 		}
 	}
+	
 
 	@Override
 	public int getFrameNumber() {
