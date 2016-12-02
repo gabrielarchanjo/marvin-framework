@@ -67,6 +67,7 @@ public class MarvinPluginCollection {
 										television,
 										tileTexture,
 										thresholding,
+										thresholdingNeighborhood,
 										watershed;
 	
 	/*==============================================================================================
@@ -619,14 +620,34 @@ public class MarvinPluginCollection {
 		thresholding(image, image, threshold);
 	}
 	
-	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold){
-		thresholding(imageIn, imageOut, threshold, MarvinImageMask.NULL_MASK);
+	public static void thresholding(MarvinImage image, int threshold, int thresholdRange){
+		thresholding(image, image, threshold, thresholdRange);
 	}
 	
-	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold, MarvinImageMask mask){
+	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold){
+		thresholding(imageIn, imageOut, threshold, -1);
+	}
+	
+	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold, int thresholdRange){
+		thresholding(imageIn, imageOut, threshold, thresholdRange, MarvinImageMask.NULL_MASK);
+	}
+	
+	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold, int thresholdRange, MarvinImageMask mask){
 		thresholding = checkAndLoadImagePlugin(thresholding, "org.marvinproject.image.color.thresholding");
 		thresholding.setAttribute("threshold",threshold);
+		thresholding.setAttribute("thresholdRange",thresholdRange);
 		thresholding.process(imageIn, imageOut, mask);
+	}
+	
+	/*==============================================================================================
+	  | THRESHOLDING NEIGHBORHOOD
+	  ==============================================================================================*/
+	public static void thresholdingNeighborhood(MarvinImage imageIn, MarvinImage imageOut, double thresholdPercentageOfAverage, int neighborhoodSide, int samplingPixelDistance){
+		thresholdingNeighborhood = checkAndLoadImagePlugin(thresholding, "org.marvinproject.image.color.thresholdingNeighborhood");
+		thresholdingNeighborhood.setAttribute("thresholdPercentageOfAverage",thresholdPercentageOfAverage);
+		thresholdingNeighborhood.setAttribute("neighborhoodSide",neighborhoodSide);
+		thresholdingNeighborhood.setAttribute("samplingPixelDistance",samplingPixelDistance);
+		thresholdingNeighborhood.process(imageIn, imageOut);
 	}
 	
 	/*==============================================================================================
