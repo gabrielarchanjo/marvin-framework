@@ -59,6 +59,7 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 			grabber.setImageWidth(width);
 			grabber.setImageHeight(height);
 			grabber.start();
+			grabber.grab();
 			connected = true;
 		}
 		catch(Exception e){

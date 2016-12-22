@@ -12,7 +12,7 @@ public class MarvinSegment {
 
 	public int width;
 	public int height;
-	public int mass;
+	public int area;
 
 	public MarvinSegment(){
 		this(-1,-1,-1,-1);
@@ -23,13 +23,13 @@ public class MarvinSegment {
 		this.y1 = y1;
 		this.x2 = x2;
 		this.y2 = y2;
-		this.width = x2-x1;
-		this.height = y2-y1;
-		this.mass = this.width*this.height;
+		this.width = (x2-x1)+1;
+		this.height = (y2-y1)+1;
+		this.area = this.width*this.height;
 	}
 
 	public String toString(){
-		return "{x1:"+x1+", x2:"+x2+", y1:"+y1+", y2:"+y2+", width:"+width+", height:"+height+", mass:"+mass+"}";
+		return "{x1:"+x1+", x2:"+x2+", y1:"+y1+", y2:"+y2+", width:"+width+", height:"+height+", area:"+area+"}";
 	}
 	
 	public static void segmentMinDistance(List<MarvinSegment> segments, double minDistance){

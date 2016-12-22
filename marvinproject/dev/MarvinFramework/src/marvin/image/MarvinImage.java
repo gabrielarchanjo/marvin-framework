@@ -61,6 +61,12 @@ public class MarvinImage implements Cloneable {
 	int height;
 	
 	/**
+	 * Creates an image with just 1x1 resolution. Useful in cases where the dimension is set dynamically.
+	 */
+	public MarvinImage(){
+		this(1,1);
+	}
+	/**
 	 * Constructor using a image in memory
 	 * @param img Image
 	 */
@@ -71,6 +77,7 @@ public class MarvinImage implements Cloneable {
 		height = img.getHeight();
 		colorModel = COLOR_MODEL_RGB;
 		updateColorArray();
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 	}
 	
 	/**
@@ -85,6 +92,7 @@ public class MarvinImage implements Cloneable {
 		height = img.getHeight();
 		colorModel = COLOR_MODEL_RGB;
 		updateColorArray();
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 	}
 
 	/**
@@ -270,7 +278,7 @@ public class MarvinImage implements Cloneable {
 	 */
 	public void setAlphaComponent(int x, int y, int alpha){
 		int color = arrIntColor[((y*width+x))];
-		color = alpha << 24 + (color & 0x00FFFFFF);
+		color = (alpha << 24) + (color & 0x00FFFFFF);
 		arrIntColor[((y*width+x))] = color;
 	}
 	
@@ -717,6 +725,20 @@ public class MarvinImage implements Cloneable {
 			for(int j=y; j<y+h; j++){
 				if(i < width && j < height){
 					setIntColor(i,j,color);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Set alpha to 0 for a given color
+	 * @param color target color
+	 */
+	public void setAlphaByColor(int alpha, int color){
+		for(int y=0; y<height; y++){
+			for(int x=0; x<width; x++){
+				if((getIntColor(x,y) & 0x00FFFFFF) == (color & 0x00FFFFFF)){
+					setAlphaComponent(x,y,alpha);
 				}
 			}
 		}
