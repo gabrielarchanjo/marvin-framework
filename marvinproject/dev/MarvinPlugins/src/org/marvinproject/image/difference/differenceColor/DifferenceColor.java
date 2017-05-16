@@ -27,7 +27,7 @@ import marvin.util.MarvinAttributes;
 public class DifferenceColor extends MarvinAbstractImagePlugin{
 	
 	private MarvinAttributes 	attributes;
-	private MarvinImage 		comparisonImage; 
+	private MarvinImage 		imageB; 
 	
 	private int					colorRGB;
 	private int					colorRange;
@@ -40,7 +40,7 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 	
 	public MarvinAttributesPanel getAttributesPanel(){ return null; }
 	
-	public void process(MarvinImage a_imageIn, MarvinImage a_imageOut, MarvinAttributes a_attributesOut, MarvinImageMask a_mask, boolean a_previewMode){
+	public double diff(MarvinImage imageA, MarvinImage imageB, int colorRange){
 		int l_redA,
 		l_redB,
 		l_greenA,
@@ -48,25 +48,17 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 		l_blueA,
 		l_blueB;
 		
-		comparisonImage = (MarvinImage)attributes.get("comparisonImage");
-		colorRange = (Integer)attributes.get("colorRange");
-		colorRGB = ((Color)attributes.get("differenceColor")).getRGB();
-		
-		boolean[][] l_arrMask = a_mask.getMask();
 		int total=0;
-		for(int y=0; y<a_imageIn.getHeight(); y++){
-			for(int x=0; x<a_imageIn.getWidth(); x++){
-				if(l_arrMask != null && !l_arrMask[x][y]){
-					continue;
-				}
+		for(int y=0; y<imageA.getHeight(); y++){
+			for(int x=0; x<imageA.getWidth(); x++){
 				
-				l_redA = a_imageIn.getIntComponent0(x, y);
-				l_greenA = a_imageIn.getIntComponent1(x, y);
-				l_blueA = a_imageIn.getIntComponent2(x, y);
+				l_redA = imageA.getIntComponent0(x, y);
+				l_greenA = imageA.getIntComponent1(x, y);
+				l_blueA = imageA.getIntComponent2(x, y);
 				
-				l_redB = comparisonImage.getIntComponent0(x, y);
-				l_greenB = comparisonImage.getIntComponent1(x, y);
-				l_blueB = comparisonImage.getIntComponent2(x, y);
+				l_redB = imageB.getIntComponent0(x, y);
+				l_greenB = imageB.getIntComponent1(x, y);
+				l_blueB = imageB.getIntComponent2(x, y);
 				
 				if
 				(
@@ -82,7 +74,7 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 				}
 				else{
 					if(a_imageOut != null){
-						a_imageOut.setIntColor(x, y, a_imageIn.getIntColor(x,y));
+						a_imageOut.setIntColor(x, y, imageA.getIntColor(x,y));
 					}
 				}
 			}

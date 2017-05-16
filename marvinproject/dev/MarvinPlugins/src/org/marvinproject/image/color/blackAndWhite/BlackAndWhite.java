@@ -35,7 +35,7 @@ public class BlackAndWhite extends MarvinAbstractImagePlugin{
 		int gray;
 		for(int y=0; y<imageOut.getHeight(); y++){
 			for(int x=0; x<imageOut.getWidth(); x++){
-				gray = imageOut.getIntComponent0(x, y);
+				gray = imageIn.getIntComponent0(x, y);
 				
 				
 				if(gray <= 127){
