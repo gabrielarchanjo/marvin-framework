@@ -16,17 +16,19 @@ import java.io.File;
 import java.nio.ByteBuffer;
 
 import marvin.image.MarvinImage;
+import marvin.util.ConverterUtil;
 
-import com.googlecode.javacv.FrameGrabber;
-import com.googlecode.javacv.OpenCVFrameGrabber;
-import com.googlecode.javacv.VideoInputFrameGrabber;
-import com.googlecode.javacv.cpp.opencv_core.IplImage;
+import org.bytedeco.javacpp.opencv_core.IplImage;
+import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameGrabber;
+import org.bytedeco.javacv.VideoInputFrameGrabber;
+
+
 
 public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 	
 	//OpenCVFrameConverter.ToIplImage converterToIpl = new OpenCVFrameConverter.ToIplImage();
 	//Java2DFrameConverter paintConverter = new Java2DFrameConverter();
-	
 	private FrameGrabber	grabber;
 	private IplImage		image;
 	//Mat						image;
@@ -55,7 +57,11 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 		
 		
 		try{
-			grabber= new VideoInputFrameGrabber(deviceIndex);
+			/*
+			 *  FrameGrabber.createDefault(deviceIndex); works for both windows and Linux 
+			 *  VideoFrameGrabber didnt work in Linux
+			 */
+			grabber= FrameGrabber.createDefault(deviceIndex);
 			grabber.setImageWidth(width);
 			grabber.setImageHeight(height);
 			grabber.start();
@@ -78,7 +84,7 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 			//grabber.setImageWidth(width);
 			//grabber.setImageHeight(height);
 			grabber.start();
-			BufferedImage bufImage = grabber.grab().getBufferedImage();
+			BufferedImage bufImage = ConverterUtil.frametoBufferedImage(grabber.grabFrame());
 			//image = converterToIpl.convert(grabber.grab());
 			this.width = bufImage.getWidth();
 			this.height = bufImage.getHeight();
@@ -125,7 +131,7 @@ public class MarvinJavaCVAdapter implements MarvinVideoInterface{
 			try
 			{
 				if(mode == MODE.DEVICE || grabber.getFrameNumber() < grabber.getLengthInFrames()-1){
-					 image=grabber.grab();
+					 image=ConverterUtil.frametoIplImage(grabber.grab());
 					 convertToIntArray(image, intArray);
 					 marvinImage.setIntColorArray(intArray);
 					 return marvinImage;
