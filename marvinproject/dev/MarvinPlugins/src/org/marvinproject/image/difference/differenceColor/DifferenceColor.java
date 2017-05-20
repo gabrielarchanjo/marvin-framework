@@ -33,14 +33,22 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 	private int					colorRange;
 	
 	public void load(){
-		attributes = getAttributes();
-		attributes.set("colorRange", 30);
-		attributes.set("differenceColor", Color.green);
+		setAttribute("colorRange", 30);
+		setAttribute("differenceColor", Color.green);
 	}
 	
 	public MarvinAttributesPanel getAttributesPanel(){ return null; }
+
+	@Override
+	public void process(MarvinImage imgIn, MarvinImage imgOut,
+			MarvinAttributes attrOut, MarvinImageMask mask, boolean previewMode) {
+		
+		int colorRange = (Integer)getAttribute("colorRange");
+		diff(imgIn, imgOut, colorRange, attrOut);
+	}
 	
-	public double diff(MarvinImage imageA, MarvinImage imageB, int colorRange){
+	
+	private void diff(MarvinImage imageA, MarvinImage imageB, int colorRange, MarvinAttributes attrOut){
 		int l_redA,
 		l_redB,
 		l_greenA,
@@ -67,21 +75,21 @@ public class DifferenceColor extends MarvinAbstractImagePlugin{
 					Math.abs(l_blueA-l_blueB)> colorRange
 				)
 				{
-					if(a_imageOut != null){
-						a_imageOut.setIntColor(x, y, colorRGB);
+					if(imageB != null){
+						imageB.setIntColor(x, y, colorRGB);
 					}
 					total++;
 				}
 				else{
-					if(a_imageOut != null){
-						a_imageOut.setIntColor(x, y, imageA.getIntColor(x,y));
+					if(imageB != null){
+						imageB.setIntColor(x, y, imageA.getIntColor(x,y));
 					}
 				}
 			}
 		}
 		
-		if(a_attributesOut != null){
-			a_attributesOut.set("total", total);
+		if(attrOut != null){
+			attrOut.set("total", total);
 		}
 	}
 }
