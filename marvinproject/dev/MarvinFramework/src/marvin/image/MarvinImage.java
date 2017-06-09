@@ -734,11 +734,25 @@ public class MarvinImage implements Cloneable {
 	 * Set alpha to 0 for a given color
 	 * @param color target color
 	 */
-	public void setAlphaByColor(int alpha, int color){
+	public void setColorToAlpha(int alpha, int color){
 		for(int y=0; y<height; y++){
 			for(int x=0; x<width; x++){
 				if((getIntColor(x,y) & 0x00FFFFFF) == (color & 0x00FFFFFF)){
 					setAlphaComponent(x,y,alpha);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Set pixels having alpha == 0 to an a given color.
+	 * @param color
+	 */
+	public void setAlphaToColor(int color){
+		for(int y=0; y<height; y++){
+			for(int x=0; x<width; x++){
+				if(getAlphaComponent(x, y) == 0){
+					setIntColor(x, y, 0xFFFFFFFF);
 				}
 			}
 		}
