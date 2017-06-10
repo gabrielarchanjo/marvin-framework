@@ -58,10 +58,13 @@ public class GrayScaleQuantization extends MarvinAbstractImagePlugin{
 		int c2;
 		for(int y=0; y<imageIn.getHeight(); y++){
 			for(int x=0; x<imageIn.getWidth(); x++){
-				c = imageIn.getIntComponent0(x, y);
-				c2 = (c/range)*range;
 				
-				imageOut.setIntColor(x, y, 255, c2,c2,c2);
+				if(imageIn.getAlphaComponent(x,y) > 0){
+					c = imageIn.getIntComponent0(x, y);
+					c2 = (c/range)*range;
+					
+					imageOut.setIntColor(x, y, 255, c2,c2,c2);
+				}
 			}
 		}
 	}

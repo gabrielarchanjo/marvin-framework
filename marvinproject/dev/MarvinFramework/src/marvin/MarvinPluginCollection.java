@@ -49,6 +49,7 @@ public class MarvinPluginCollection {
 										morphologicalDilation,
 										morphologicalErosion,
 										morphologicalOpening,
+										morphologicalThinning,
 										mosaic,
 										pixelize,
 										prewitt,
@@ -839,6 +840,19 @@ public class MarvinPluginCollection {
 		morphologicalOpening = checkAndLoadImagePlugin(morphologicalOpening, "org.marvinproject.image.morphological.opening");
 		morphologicalOpening.setAttribute("matrix", matrix);
 		morphologicalOpening.process(imageIn, imageOut);
+	}
+	
+	/*==============================================================================================
+	  | MORPHOLOCIAL THINNING
+	  ==============================================================================================*/
+	/**
+	 * Morphological thinning operation
+	 * @param imageIn		input image
+	 * @param imageOut		output image
+	 */
+	public static void morphologicalThinning(MarvinImage imageIn, MarvinImage imageOut){
+		morphologicalThinning = checkAndLoadImagePlugin(morphologicalThinning, "org.marvinproject.image.morphological.thinning");
+		morphologicalThinning.process(imageIn, imageOut);
 	}
 	
 	/*==============================================================================================

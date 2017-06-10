@@ -33,7 +33,6 @@ import marvin.plugin.MarvinImagePlugin;
 import marvin.plugin.MarvinPlugin;
 
 import org.marvinproject.image.edge.prewitt.Prewitt;
-import org.marvinproject.image.segmentation.imageSlicer.ImageSlicer;
 
 /**
  * Test plug-ins and generate .jar files
