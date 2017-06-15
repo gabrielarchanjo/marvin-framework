@@ -712,6 +712,25 @@ public class MarvinImage implements Cloneable {
 	}
 	
 	/**
+	 * Fills a rectangle in a binary image
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param value
+	 */
+	public void fillRectBinaryt(int x, int y, int w, int h, boolean value){
+		if(colorModel == COLOR_MODEL_BINARY){
+			for(int i=x; i<x+w; i++){
+				for(int j=y; j<y+h; j++){
+					if(i < width && j < height){
+						setBinaryColor(i,j,value);
+					}
+				}
+			}
+		}
+	}
+	/**
 	 * Fills a rectangle in the image.
 	 * @param x		rect´s start position in x-axis
 	 * @param y		rect´s start positioj in y-axis
