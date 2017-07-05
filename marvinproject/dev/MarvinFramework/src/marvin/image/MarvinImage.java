@@ -339,7 +339,7 @@ public class MarvinImage implements Cloneable {
 	}
 	
 	public boolean isValidPosition(int x, int y){
-		if(x >= 0 && x < image.getWidth() && y >= 0 && y < getHeight()){
+		if(x >= 0 && x < getWidth() && y >= 0 && y < getHeight()){
 			return true;
 		}
 		return false;
