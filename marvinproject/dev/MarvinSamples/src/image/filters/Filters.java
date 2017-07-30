@@ -11,10 +11,6 @@ https://groups.google.com/forum/#!forum/marvin-project
 
 package image.filters;
 
-import static marvin.MarvinPluginCollection.grayScale;
-import static marvin.MarvinPluginCollection.invertColors;
-import static marvin.MarvinPluginCollection.sepia;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -24,11 +20,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import marvin.MarvinPluginCollection;
 import marvin.gui.MarvinImagePanel;
 import marvin.image.MarvinImage;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
+
+import static marvinplugins.MarvinPluginCollection.*;
 
 /**
  * Filter application sample

@@ -14,10 +14,10 @@ package image.loadAndSave;
 import javax.swing.JFrame;
 
 import marvin.image.MarvinImage;
-import marvin.image.MarvinImageMask;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.invert.Invert;
 
 /**
  * Load and save sample.
@@ -38,7 +38,8 @@ public class LoadAndSave extends JFrame
 		MarvinImage l_image;
 		l_image = MarvinImageIO.loadImage("./res/arara.jpg");
 		
-		MarvinImagePlugin l_pluginImage = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.invert.jar");
+		MarvinImagePlugin l_pluginImage = new Invert();
+		l_pluginImage.load();
 		l_pluginImage.process(l_image, l_image);
 		l_image.update();
 		

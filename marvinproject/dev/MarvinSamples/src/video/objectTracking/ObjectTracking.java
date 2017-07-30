@@ -29,10 +29,11 @@ import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
 import marvin.video.MarvinJavaCVAdapter;
 import marvin.video.MarvinVideoInterface;
 import marvin.video.MarvinVideoInterfaceException;
+
+import org.marvinproject.image.pattern.findColorPattern.FindColorPattern;
 
 /**
  * Object tracking by color pattern
@@ -80,7 +81,8 @@ public class ObjectTracking extends JFrame implements Runnable{
 			
 			loadGUI();
 			
-			pluginImage = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.pattern.findColorPattern.jar");
+			pluginImage = new FindColorPattern();
+			pluginImage.load();
 			
 			attributesOut = new MarvinAttributes(null);
 	

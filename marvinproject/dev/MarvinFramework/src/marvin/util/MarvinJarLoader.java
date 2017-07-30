@@ -25,6 +25,7 @@ import java.util.jar.JarFile;
  */
 public class MarvinJarLoader extends ClassLoader {
 	
+	
 	private JarFile jarFile;
 	private Enumeration<JarEntry> eJarEntries;
 	

@@ -30,10 +30,12 @@ import marvin.image.MarvinImageMask;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
 import marvin.video.MarvinJavaCVAdapter;
 import marvin.video.MarvinVideoInterface;
 import marvin.video.MarvinVideoInterfaceException;
+
+import org.marvinproject.image.pattern.findColorPattern.FindColorPattern;
+import org.marvinproject.image.render.renderText.RenderText;
 
 /**
  * Tracking game sample
@@ -116,8 +118,10 @@ public class TrackingGameBalls extends JFrame implements Runnable{
 				arrBall[l_i].used = false;
 			}
 			
-			pluginColorPattern = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.pattern.findColorPattern.jar");
-			text				= MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.render.text.jar");
+			pluginColorPattern = new FindColorPattern();
+			pluginColorPattern.load();
+			text				= new RenderText();
+			text.load();
 			text.setAttribute("fontFile", MarvinImageIO.loadImage("./res/font.png"));
 			text.setAttribute("color", 0xFFFFFFFF);
 			

@@ -9,7 +9,7 @@ Discussion group:
 https://groups.google.com/forum/#!forum/marvin-project
 */
 
-package org.marvinproject.image.render.text;
+package org.marvinproject.image.render.renderText;
 
 import java.util.HashMap;
 
@@ -19,7 +19,7 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.util.MarvinAttributes;
 
-public class Text extends MarvinAbstractImagePlugin{
+public class RenderText extends MarvinAbstractImagePlugin{
 
 	private MarvinAttributes attributes;
 	private HashMap<Character, CharacterDescription> chars;

@@ -6,7 +6,8 @@ import java.util.List;
 import marvin.image.MarvinImage;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.combine.mergePhotos.MergePhotos;
 
 public class MergePhotosExample {
 
@@ -19,7 +20,8 @@ public class MergePhotosExample {
 		}
 		
 		// 2. Load plug-in and process the image
-		MarvinImagePlugin merge = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.combine.mergePhotos");
+		MarvinImagePlugin merge = new MergePhotos();
+		merge.load();
 		merge.setAttribute("threshold", 38);
 		
 		// 3. Process the image list and save the output

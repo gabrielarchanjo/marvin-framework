@@ -21,38 +21,38 @@ import marvin.plugin.MarvinImagePlugin;
  */
 public class MarvinPluginLoader {
 	
-	/**
-	 * Loads a MarvinPluginImage via MarvinJarLoader
-	 * @param pluginPath		plug-in큦 jar file path.
-	 * @return 					a loaded MarvinPluginImage.
-	 */
-	public static MarvinImagePlugin loadImagePlugin(String pluginPath){
-		MarvinImagePlugin l_plugin;
-		String l_className = pluginPath.replace(".jar", "");
-		if(l_className.lastIndexOf(".") != -1){
-			l_className = l_className.substring(l_className.lastIndexOf(".")+1);
-		}
-		l_className = l_className.substring(0,1).toUpperCase()+l_className.substring(1);
-		
-		l_plugin = (MarvinImagePlugin)loadPlugin(MarvinDefinitions.PLUGIN_IMAGE_PATH+pluginPath, l_className);
-		l_plugin.load();
-		return l_plugin;
-	}
-	
-	/**
-	 * Loads a MarvinPlugin via MarvinJarLoader
-	 * @param pluginPath	plug-in큦 jar file path.
-	 * @param className		plug-in큦 class name.
-	 * @return
-	 */
-	private static MarvinPlugin loadPlugin(String pluginPath, String className){
-		if(!pluginPath.substring(pluginPath.length()-4, pluginPath.length()).equals(".jar")){
-			pluginPath = pluginPath + ".jar";
-		}
-		
-		MarvinPlugin l_plugin;
-		MarvinJarLoader l_loader = new MarvinJarLoader(pluginPath);
-		l_plugin = (MarvinPlugin)l_loader.getObject(className);
-		return l_plugin;
-	}
+//	/**
+//	 * Loads a MarvinPluginImage via MarvinJarLoader
+//	 * @param pluginPath		plug-in큦 jar file path.
+//	 * @return 					a loaded MarvinPluginImage.
+//	 */
+//	public static MarvinImagePlugin loadImagePlugin(String pluginPath){
+//		MarvinImagePlugin l_plugin;
+//		String l_className = pluginPath.replace(".jar", "");
+//		if(l_className.lastIndexOf(".") != -1){
+//			l_className = l_className.substring(l_className.lastIndexOf(".")+1);
+//		}
+//		l_className = l_className.substring(0,1).toUpperCase()+l_className.substring(1);
+//		
+//		l_plugin = (MarvinImagePlugin)loadPlugin(MarvinDefinitions.PLUGIN_IMAGE_PATH+pluginPath, l_className);
+//		l_plugin.load();
+//		return l_plugin;
+//	}
+//	
+//	/**
+//	 * Loads a MarvinPlugin via MarvinJarLoader
+//	 * @param pluginPath	plug-in큦 jar file path.
+//	 * @param className		plug-in큦 class name.
+//	 * @return
+//	 */
+//	private static MarvinPlugin loadPlugin(String pluginPath, String className){
+//		if(!pluginPath.substring(pluginPath.length()-4, pluginPath.length()).equals(".jar")){
+//			pluginPath = pluginPath + ".jar";
+//		}
+//		
+//		MarvinPlugin l_plugin;
+//		MarvinJarLoader l_loader = new MarvinJarLoader(pluginPath);
+//		l_plugin = (MarvinPlugin)l_loader.getObject(className);
+//		return l_plugin;
+//	}
 }

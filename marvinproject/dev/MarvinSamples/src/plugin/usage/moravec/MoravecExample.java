@@ -17,12 +17,13 @@ import marvin.image.MarvinImage;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.corner.moravec.Moravec;
 
 public class MoravecExample {
 	public static void main(String[] args) {
 		
-		MarvinImagePlugin moravec = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.corner.moravec");
+		MarvinImagePlugin moravec = new Moravec();
 		moravec.load();
 		moravec.setAttribute("threshold", 50000);
 		

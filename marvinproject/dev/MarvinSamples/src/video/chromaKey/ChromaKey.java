@@ -29,10 +29,13 @@ import marvin.gui.MarvinImagePanel;
 import marvin.image.MarvinImage;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
-import marvin.util.MarvinPluginLoader;
 import marvin.video.MarvinJavaCVAdapter;
 import marvin.video.MarvinVideoInterface;
 import marvin.video.MarvinVideoInterfaceException;
+
+import org.marvinproject.image.combine.combineByMask.CombineByMask;
+import org.marvinproject.image.subtract.Subtract;
+import org.marvinproject.image.transform.scale.Scale;
 
 /**
  * Subtract the background and combine other image.
@@ -80,14 +83,17 @@ public class ChromaKey extends JFrame implements Runnable{
 			
 			loadGUI();
 			
-			pluginChroma = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.subtract.jar");
-			pluginCombine = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.combine.combineByMask.jar");
+			pluginChroma = new Subtract();
+			pluginChroma.load();
+			pluginCombine = new CombineByMask();
+			pluginCombine.load();
 			
 			MarvinImage l_imageParadise = MarvinImageIO.loadImage("./res/paradise.jpg");
 			Integer cameraWidth = videoInterface.getImageWidth();
 			Integer cameraHeight = videoInterface.getImageHeight();
 			 		
-			MarvinImagePlugin pluginScale = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.transform.scale.jar");
+			MarvinImagePlugin pluginScale = new Scale();
+			pluginScale.load();
 			pluginScale.setAttribute("newWidth", cameraWidth);
 			pluginScale.setAttribute("newHeight", cameraHeight);
 			

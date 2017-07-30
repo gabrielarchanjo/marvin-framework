@@ -14,8 +14,6 @@ package video.detectMotionRegions;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.image.ImageProducer;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -30,10 +28,11 @@ import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
 import marvin.video.MarvinJavaCVAdapter;
 import marvin.video.MarvinVideoInterface;
 import marvin.video.MarvinVideoInterfaceException;
+
+import org.marvinproject.image.difference.differentRegions.DifferentRegions;
 
 /**
  * Detect the motion regions considering the difference between frames.
@@ -78,7 +77,8 @@ public class DetectMotionRegions extends JFrame implements Runnable{
 			
 			attributesOut = new MarvinAttributes(null);
 			
-			pluginMotionRegions = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.difference.differentRegions.jar");
+			pluginMotionRegions = new DifferentRegions();
+			pluginMotionRegions.load();
 			pluginMotionRegions.setAttribute("comparisonImage", imageLastFrame);
 			
 			loadGUI();

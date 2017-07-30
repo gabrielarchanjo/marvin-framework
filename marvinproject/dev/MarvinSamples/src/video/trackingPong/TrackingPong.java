@@ -30,10 +30,13 @@ import marvin.image.MarvinImageMask;
 import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
 import marvin.video.MarvinJavaCVAdapter;
 import marvin.video.MarvinVideoInterface;
 import marvin.video.MarvinVideoInterfaceException;
+
+import org.marvinproject.image.pattern.findColorPattern.FindColorPattern;
+import org.marvinproject.image.render.renderText.RenderText;
+import org.marvinproject.image.transform.flip.Flip;
 
 /**
  * Tracking game sample
@@ -117,9 +120,12 @@ public class TrackingPong extends JFrame implements Runnable{
 			loadGUI();
 			
 			// 3. Load and set up Marvin plug-ins.
-			findColorPattern 	= MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.pattern.findColorPattern");
-			flip				= MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.transform.flip");
-			text				= MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.render.text");
+			findColorPattern 	= new FindColorPattern();
+			findColorPattern.load();
+			flip				= new Flip();
+			flip.load();
+			text				= new RenderText();
+			text.load();
 			text.setAttribute("fontFile", MarvinImageIO.loadImage("./res/font.png"));
 			text.setAttribute("color", 0xFFFFFFFF);
 			
