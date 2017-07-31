@@ -17,7 +17,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 /**
  * Thresholding
@@ -43,7 +44,8 @@ public class Thresholding extends MarvinAbstractImagePlugin{
 		attributes.set("neighborhood", -1);
 		attributes.set("range", -1);
 		
-		pluginGray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
+		pluginGray = new GrayScale();
+		pluginGray.load();
 	}
 	
 	public MarvinAttributesPanel getAttributesPanel(){

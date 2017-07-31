@@ -12,13 +12,13 @@ https://groups.google.com/forum/#!forum/marvin-project
 package org.marvinproject.image.morphological.boundary;
 
 import marvin.gui.MarvinAttributesPanel;
-import marvin.gui.MarvinFilterWindow;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.morphological.erosion.Erosion;
 
 public class Boundary extends MarvinAbstractImagePlugin{
 
@@ -35,7 +35,8 @@ public class Boundary extends MarvinAbstractImagePlugin{
 			{true,true,true},
 		};
 		
-		pluginErosion = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.morphological.erosion.jar");
+		pluginErosion = new Erosion();
+		pluginErosion.load();
 		pluginErosion.setAttribute("matrix", matrix);
 	}
 	

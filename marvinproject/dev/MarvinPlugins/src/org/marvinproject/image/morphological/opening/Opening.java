@@ -12,13 +12,14 @@ https://groups.google.com/forum/#!forum/marvin-project
 package org.marvinproject.image.morphological.opening;
 
 import marvin.gui.MarvinAttributesPanel;
-import marvin.gui.MarvinFilterWindow;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.morphological.dilation.Dilation;
+import org.marvinproject.image.morphological.erosion.Erosion;
 
 public class Opening extends MarvinAbstractImagePlugin{
 
@@ -32,8 +33,10 @@ public class Opening extends MarvinAbstractImagePlugin{
 	public void load() {
 		setAttribute("matrix", matrix);
 		
-		pluginDilation = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.morphological.dilation.jar");
-		pluginErosion = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.morphological.erosion.jar");
+		pluginDilation = new Dilation();
+		pluginDilation.load();
+		pluginErosion = new Erosion();
+		pluginErosion.load();
 		
 	}
 

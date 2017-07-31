@@ -17,7 +17,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.convolution.Convolution;
 
 /**
  * @author Gabriel Ambrósio Archanjo
@@ -38,7 +39,8 @@ public class Roberts extends MarvinAbstractImagePlugin{
 	private MarvinImagePlugin 	convolution;
 	
 	public void load(){
-		convolution = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.convolution.jar");
+		convolution = new Convolution();
+		convolution.load();
 	}
 	
 	public MarvinAttributesPanel getAttributesPanel(){

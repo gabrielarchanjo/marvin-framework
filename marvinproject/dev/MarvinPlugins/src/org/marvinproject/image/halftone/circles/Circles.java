@@ -16,14 +16,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import marvin.gui.MarvinAttributesPanel;
-import marvin.gui.MarvinFilterWindow;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.performance.MarvinPerformanceMeter;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 /**
  * Halftone using circles.
@@ -82,7 +82,8 @@ public class Circles extends MarvinAbstractImagePlugin
 		Graphics l_graphics = a_imageOut.getBufferedImage().getGraphics();
 
 		// Gray
-		MarvinImagePlugin l_filter = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
+		MarvinImagePlugin l_filter = new GrayScale();
+		l_filter.load();
 		l_filter.process(a_imageIn, a_imageIn, a_attributesOut, a_mask, a_previewMode);
 		
 		performanceMeter.enableProgressBar("Halftone - Circles" , (a_imageIn.getHeight()/(circleWidth+circlesDistance))*(a_imageIn.getWidth()/(circleWidth+circlesDistance)));

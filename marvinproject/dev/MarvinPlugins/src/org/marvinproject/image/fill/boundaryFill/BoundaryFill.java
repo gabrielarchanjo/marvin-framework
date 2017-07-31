@@ -21,7 +21,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.texture.tileTexture.TileTexture;
 
 public class BoundaryFill extends MarvinAbstractImagePlugin{
 	
@@ -115,7 +116,8 @@ public class BoundaryFill extends MarvinAbstractImagePlugin{
     	}    
     	
     	if(tileImage != null){
-    		MarvinImagePlugin p = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.texture.tileTexture.jar");
+    		MarvinImagePlugin p = new TileTexture();
+    		p.load();
     		p.setAttribute("lines", (int)(Math.ceil((double)imgOut.getHeight()/tileImage.getHeight())));
     		p.setAttribute("columns", (int)(Math.ceil((double)imgOut.getWidth()/tileImage.getWidth())));
     		p.setAttribute("tile", tileImage);

@@ -23,7 +23,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 /**
  * 
@@ -40,7 +41,9 @@ public class Watershed extends MarvinAbstractImagePlugin {
 	
 	@Override
 	public void load() {
-		gray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale");
+		gray = new GrayScale();
+		gray.load();
+		
 
 		HeightMap = new ArrayList<List<WatershedPixel>>(256);
 		//initialize HeightMap

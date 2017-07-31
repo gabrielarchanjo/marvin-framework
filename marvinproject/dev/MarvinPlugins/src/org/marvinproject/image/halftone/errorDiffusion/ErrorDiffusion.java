@@ -12,14 +12,14 @@ https://groups.google.com/forum/#!forum/marvin-project
 package org.marvinproject.image.halftone.errorDiffusion;
 
 import marvin.gui.MarvinAttributesPanel;
-import marvin.gui.MarvinFilterWindow;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.performance.MarvinPerformanceMeter;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 /**
  * Halftone Error Diffusion implementation.
@@ -56,7 +56,8 @@ public class ErrorDiffusion extends MarvinAbstractImagePlugin
 		double dif;
 
 		// Gray
-		MarvinImagePlugin l_filter = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
+		MarvinImagePlugin l_filter = new GrayScale();
+		l_filter.load();
 		l_filter.process(a_imageIn, a_imageOut, a_attributesOut, a_mask, a_previewMode);
 		
 		performanceMeter.start("Halftone - Error Diffusion");

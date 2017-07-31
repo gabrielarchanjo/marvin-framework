@@ -10,7 +10,8 @@ import marvin.image.MarvinSegment;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.thresholding.Thresholding;
 
 public class FindTextRegions extends MarvinAbstractImagePlugin{
 
@@ -22,7 +23,8 @@ public class FindTextRegions extends MarvinAbstractImagePlugin{
 		setAttribute("maxFontLineWidth", 10);
 		setAttribute("minTextWidth", 30);
 		setAttribute("grayScaleThreshold", 127);
-		threshold = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.thresholding.jar");	
+		threshold = new Thresholding();
+		threshold.load();
 	}
 	
 	@Override

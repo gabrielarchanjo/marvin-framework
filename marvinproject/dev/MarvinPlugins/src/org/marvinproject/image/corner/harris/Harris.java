@@ -27,7 +27,8 @@ public class Harris extends MarvinAbstractImagePlugin {
 	private MarvinImagePlugin gray;
 	@Override
 	public void load() {
-		gray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale");
+		gray = new GrayScale();
+		gray.load();
 		setAttribute("matrixSize", 7);
 		setAttribute("threshold", 500);
 		setAttribute("k", 0.004);

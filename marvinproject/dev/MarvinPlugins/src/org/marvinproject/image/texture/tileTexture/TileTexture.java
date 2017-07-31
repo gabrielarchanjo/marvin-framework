@@ -12,13 +12,13 @@ https://groups.google.com/forum/#!forum/marvin-project
 package org.marvinproject.image.texture.tileTexture;
 
 import marvin.gui.MarvinAttributesPanel;
-import marvin.gui.MarvinFilterWindow;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.transform.flip.Flip;
 
 public class TileTexture extends MarvinAbstractImagePlugin{
 
@@ -32,7 +32,8 @@ public class TileTexture extends MarvinAbstractImagePlugin{
 		attributes.set("lines", 2);
 		attributes.set("columns", 2);
 		
-		flip = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.transform.flip.jar");
+		flip = new Flip();
+		flip.load();
 	}
 	
 	public MarvinAttributesPanel getAttributesPanel(){

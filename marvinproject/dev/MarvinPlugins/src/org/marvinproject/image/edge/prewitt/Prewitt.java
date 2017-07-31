@@ -18,7 +18,8 @@ import marvin.math.MarvinMath;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.convolution.Convolution;
 
 /**
  * @author Gabriel Ambrósio Archanjo
@@ -41,7 +42,8 @@ public class Prewitt extends MarvinAbstractImagePlugin{
 	private MarvinImagePlugin 	convolution;
 	
 	public void load(){
-		convolution = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.convolution.jar");
+		convolution = new Convolution();
+		convolution.load();
 		setAttribute("intensity", 1.0);
 	}
 	

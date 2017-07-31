@@ -11,7 +11,8 @@ import marvin.image.MarvinSegment;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.fill.boundaryFill.BoundaryFill;
 
 
 public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
@@ -19,7 +20,8 @@ public class FloodfillSegmentation extends MarvinAbstractImagePlugin{
 private MarvinImagePlugin floodfill;
 	
 	public void load(){
-		floodfill   = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.fill.boundaryFill");
+		floodfill   = new BoundaryFill();
+		floodfill.load();
 		setAttribute("returnType", "MarvinSegment");
 	}
 	

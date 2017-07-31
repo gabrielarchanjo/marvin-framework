@@ -6,7 +6,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 public class BlackAndWhite extends MarvinAbstractImagePlugin{
 
@@ -15,7 +16,8 @@ public class BlackAndWhite extends MarvinAbstractImagePlugin{
 	
 	@Override
 	public void load() {
-		grayScale = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
+		grayScale = new GrayScale();
+		grayScale.load();
 		setAttribute("level", 10);
 	}
 	

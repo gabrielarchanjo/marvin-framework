@@ -8,7 +8,8 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.background.determineSceneBackground.DetermineSceneBackground;
 
 public class MergePhotos extends MarvinAbstractImagePlugin{
 	
@@ -17,7 +18,8 @@ public class MergePhotos extends MarvinAbstractImagePlugin{
 	
 	@Override
 	public void load() {
-		background = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.background.determineSceneBackground");
+		background = new DetermineSceneBackground();
+		background.load();
 		setAttribute("threshold", 30);
 	}
 	

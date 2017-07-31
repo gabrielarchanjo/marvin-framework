@@ -22,7 +22,8 @@ import marvin.plugin.MarvinImagePlugin;
 import marvin.statistic.MarvinHistogram;
 import marvin.statistic.MarvinHistogramEntry;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 /**
  * Gray histogram is a representation of the gray scale distribution.
@@ -33,7 +34,8 @@ public class GrayHistogram extends MarvinAbstractImagePlugin
 {
 	MarvinImagePlugin pluginGray;
     public void load(){
-    	pluginGray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale.jar");
+    	pluginGray = new GrayScale();
+    	pluginGray.load();
     }
 
     public MarvinAttributesPanel getAttributesPanel(){ return null; }

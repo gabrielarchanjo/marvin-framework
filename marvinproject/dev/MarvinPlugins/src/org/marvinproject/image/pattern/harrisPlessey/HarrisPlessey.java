@@ -23,7 +23,8 @@ import marvin.performance.MarvinPerformanceMeter;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.segmentation.crop.Crop;
 
 /**
  * Absolute interst point
@@ -80,7 +81,8 @@ public class HarrisPlessey extends MarvinAbstractImagePlugin{
 	
 	public void load(){
 		performanceMeter = new MarvinPerformanceMeter();
-		crop = MarvinPluginLoader.loadImagePlugin("package org.marvinproject.image.segmentation.crop");
+		crop = new Crop();
+		crop.load();
 	}
 
 	public MarvinAttributesPanel getAttributesPanel(){return null;}

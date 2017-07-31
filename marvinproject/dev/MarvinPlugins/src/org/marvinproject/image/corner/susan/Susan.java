@@ -11,23 +11,22 @@ https://groups.google.com/forum/#!forum/marvin-project
 
 package org.marvinproject.image.corner.susan;
 
-import java.awt.Color;
-
 import marvin.gui.MarvinAttributesPanel;
 import marvin.image.MarvinImage;
 import marvin.image.MarvinImageMask;
-import marvin.io.MarvinImageIO;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.grayScale.GrayScale;
 
 public class Susan extends MarvinAbstractImagePlugin {
 
 	private MarvinImagePlugin gray;
 	@Override
 	public void load() {
-		gray = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.grayScale");
+		gray = new GrayScale();
+		gray.load();
 		setAttribute("matrixSize", 7);
 		setAttribute("threshold", 100);
 	}

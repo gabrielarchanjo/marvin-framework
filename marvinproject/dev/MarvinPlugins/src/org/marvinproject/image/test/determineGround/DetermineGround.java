@@ -21,7 +21,9 @@ import marvin.image.MarvinImageMask;
 import marvin.plugin.MarvinAbstractImagePlugin;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.color.brightnessAndContrast.BrightnessAndContrast;
+import org.marvinproject.image.edge.edgeDetector.EdgeDetector;
 
 public class DetermineGround extends MarvinAbstractImagePlugin{
 	
@@ -29,8 +31,10 @@ public class DetermineGround extends MarvinAbstractImagePlugin{
 								l_pluginBC;
 	
 	public void load(){
-		l_pluginEdgeDetector = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.edge.edgeDetector.jar");
-		l_pluginBC = MarvinPluginLoader.loadImagePlugin("org.marvinproject.image.color.brightnessAndContrast.jar");
+		l_pluginEdgeDetector = new EdgeDetector();
+		l_pluginEdgeDetector.load();
+		l_pluginBC = new BrightnessAndContrast();
+		l_pluginBC.load();
 		l_pluginBC.setAttribute("contrast", 255);
 	}
 	
