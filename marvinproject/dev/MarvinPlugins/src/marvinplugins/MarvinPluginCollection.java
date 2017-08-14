@@ -9,7 +9,53 @@ import marvin.image.MarvinImageMask;
 import marvin.image.MarvinSegment;
 import marvin.plugin.MarvinImagePlugin;
 import marvin.util.MarvinAttributes;
-import marvin.util.MarvinPluginLoader;
+
+import org.marvinproject.image.artistic.mosaic.Mosaic;
+import org.marvinproject.image.artistic.television.Television;
+import org.marvinproject.image.background.determineSceneBackground.DetermineSceneBackground;
+import org.marvinproject.image.blur.gaussianBlur.GaussianBlur;
+import org.marvinproject.image.blur.pixelize.Pixelize;
+import org.marvinproject.image.color.alphaBoundary.AlphaBoundary;
+import org.marvinproject.image.color.blackAndWhite.BlackAndWhite;
+import org.marvinproject.image.color.brightnessAndContrast.BrightnessAndContrast;
+import org.marvinproject.image.color.colorChannel.ColorChannel;
+import org.marvinproject.image.color.emboss.Emboss;
+import org.marvinproject.image.color.grayScale.GrayScale;
+import org.marvinproject.image.color.invert.Invert;
+import org.marvinproject.image.color.sepia.Sepia;
+import org.marvinproject.image.color.skinColorDetection.SkinColorDetection;
+import org.marvinproject.image.color.thresholding.Thresholding;
+import org.marvinproject.image.color.thresholdingNeighborhood.ThresholdingNeighborhood;
+import org.marvinproject.image.combine.combineByMask.CombineByMask;
+import org.marvinproject.image.combine.combineByTransparency.CombineByTransparency;
+import org.marvinproject.image.combine.mergePhotos.MergePhotos;
+import org.marvinproject.image.convolution.Convolution;
+import org.marvinproject.image.corner.harris.Harris;
+import org.marvinproject.image.corner.moravec.Moravec;
+import org.marvinproject.image.corner.susan.Susan;
+import org.marvinproject.image.edge.prewitt.Prewitt;
+import org.marvinproject.image.edge.roberts.Roberts;
+import org.marvinproject.image.edge.sobel.Sobel;
+import org.marvinproject.image.equalization.histogramEqualization.HistogramEqualization;
+import org.marvinproject.image.fill.boundaryFill.BoundaryFill;
+import org.marvinproject.image.halftone.circles.Circles;
+import org.marvinproject.image.halftone.dithering.Dithering;
+import org.marvinproject.image.halftone.errorDiffusion.ErrorDiffusion;
+import org.marvinproject.image.halftone.rylanders.Rylanders;
+import org.marvinproject.image.morphological.boundary.Boundary;
+import org.marvinproject.image.morphological.closing.Closing;
+import org.marvinproject.image.morphological.dilation.Dilation;
+import org.marvinproject.image.morphological.erosion.Erosion;
+import org.marvinproject.image.morphological.opening.Opening;
+import org.marvinproject.image.morphological.thinning.Thinning;
+import org.marvinproject.image.pattern.findSubimage.FindSubimage;
+import org.marvinproject.image.pattern.findTextRegions.FindTextRegions;
+import org.marvinproject.image.quantization.grayScaleQuantization.GrayScaleQuantization;
+import org.marvinproject.image.segmentation.crop.Crop;
+import org.marvinproject.image.segmentation.floodfillSegmentation.FloodfillSegmentation;
+import org.marvinproject.image.transform.flip.Flip;
+import org.marvinproject.image.transform.scale.Scale;
+import org.marvinproject.image.transform.watershed.Watershed;
 
 public class MarvinPluginCollection {
 
@@ -98,7 +144,7 @@ public class MarvinPluginCollection {
 	 * @param radius		transparency radius
 	 */
 	public static void alphaBoundary(MarvinImage imageIn, MarvinImage imageOut, int radius){
-		alphaBoundary = checkAndLoadImagePlugin(alphaBoundary, "org.marvinproject.image.color.alphaBoundary");
+		alphaBoundary = checkAndLoadImagePlugin(alphaBoundary, AlphaBoundary.class);
 		alphaBoundary.setAttribute("radius", radius);
 		alphaBoundary.process(imageIn, imageOut);
 	}
@@ -134,7 +180,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void blackAndWhite(MarvinImage imageIn, MarvinImage imageOut, int level, MarvinImageMask mask){
-		blackAndWhite = checkAndLoadImagePlugin(blackAndWhite, "org.marvinproject.image.color.blackAndWhite");
+		blackAndWhite = checkAndLoadImagePlugin(blackAndWhite, BlackAndWhite.class);
 		blackAndWhite.setAttribute("level", level);
 		blackAndWhite.process(imageIn, imageOut, mask);
 	}
@@ -178,7 +224,7 @@ public class MarvinPluginCollection {
 	 * @param threshold		accepted threshold to the specified color.
 	 */
 	public static void boundaryFill(MarvinImage imageIn, MarvinImage imageOut, int x, int y, Color color, MarvinImage tile, int threshold){
-		boundaryFill = checkAndLoadImagePlugin(boundaryFill, "org.marvinproject.image.fill.boundaryFill");
+		boundaryFill = checkAndLoadImagePlugin(boundaryFill, BoundaryFill.class);
 		boundaryFill.setAttribute("x", x);
 		boundaryFill.setAttribute("y", y);
 		boundaryFill.setAttribute("color", color);
@@ -220,7 +266,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void brightnessAndContrast(MarvinImage imageIn, MarvinImage imageOut, int brightness, int contrast, MarvinImageMask mask){
-		brightnessAndContrast = checkAndLoadImagePlugin(brightnessAndContrast, "org.marvinproject.image.color.brightnessAndContrast");
+		brightnessAndContrast = checkAndLoadImagePlugin(brightnessAndContrast, BrightnessAndContrast.class);
 		brightnessAndContrast.setAttribute("brightness", brightness);
 		brightnessAndContrast.setAttribute("contrast", contrast);
 		brightnessAndContrast.process(imageIn, imageOut, mask);
@@ -239,7 +285,7 @@ public class MarvinPluginCollection {
 	 * @param colorMask		Transparent color
 	 */
 	public static void combineByMask(MarvinImage imageA, MarvinImage imageB, MarvinImage imageOut, int x, int y, Color colorMask){
-		combineByMask = checkAndLoadImagePlugin(combineByMask, "org.marvinproject.image.combine.combineByMask");
+		combineByMask = checkAndLoadImagePlugin(combineByMask, CombineByMask.class);
 		combineByMask.setAttribute("xi", x);
 		combineByMask.setAttribute("yi", y);
 		combineByMask.setAttribute("combinationImage", imageB);
@@ -260,7 +306,7 @@ public class MarvinPluginCollection {
 	 * @param transparency
 	 */
 	public static void combineByTransparency(MarvinImage imageA, MarvinImage imageB, MarvinImage imageOut, int x, int y, int transparency){
-		combineByTransparency = checkAndLoadImagePlugin(combineByTransparency, "org.marvinproject.image.combine.combineByTransparency");
+		combineByTransparency = checkAndLoadImagePlugin(combineByTransparency, CombineByTransparency.class);
 		combineByTransparency.setAttribute("xi", x);
 		combineByTransparency.setAttribute("yi", y);
 		combineByTransparency.setAttribute("combinationImage", imageB);
@@ -278,7 +324,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		convolution matrix
 	 */
 	public static void convolution(MarvinImage imageIn, MarvinImage imageOut, double[][] matrix){
-		convolution = checkAndLoadImagePlugin(convolution, "org.marvinproject.image.convolution");
+		convolution = checkAndLoadImagePlugin(convolution, Convolution.class);
 		convolution.setAttribute("matrix", matrix);
 		convolution.process(imageIn, imageOut);
 	}
@@ -320,7 +366,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void colorChannel(MarvinImage imageIn, MarvinImage imageOut, int red, int green, int blue, MarvinImageMask mask){
-		colorChannel = checkAndLoadImagePlugin(colorChannel, "org.marvinproject.image.color.colorChannel");
+		colorChannel = checkAndLoadImagePlugin(colorChannel, ColorChannel.class);
 		colorChannel.setAttribute("red", red);
 		colorChannel.setAttribute("green", green);
 		colorChannel.setAttribute("blue", blue);
@@ -351,7 +397,7 @@ public class MarvinPluginCollection {
 			height = imageIn.getHeight() - y;
 		}
 		
-		crop = checkAndLoadImagePlugin(crop, "org.marvinproject.image.segmentation.crop");
+		crop = checkAndLoadImagePlugin(crop, Crop.class);
 		crop.setAttribute("x", x);
 		crop.setAttribute("y", y);
 		crop.setAttribute("width", width);
@@ -369,7 +415,7 @@ public class MarvinPluginCollection {
 	 * @param threshold		threshold considered by the pixel comparison.
 	 */
 	public static void determineSceneBackground(List<MarvinImage> images, MarvinImage imageOut, int threshold){
-		determineSceneBackground = checkAndLoadImagePlugin(determineSceneBackground, "org.marvinproject.image.background.determineSceneBackground");
+		determineSceneBackground = checkAndLoadImagePlugin(determineSceneBackground, DetermineSceneBackground.class);
 		determineSceneBackground.setAttribute("threshold", threshold);
 		determineSceneBackground.process(images, imageOut);	
 	}
@@ -395,7 +441,7 @@ public class MarvinPluginCollection {
 	 * @return				list of image segments.
 	 */
 	public static List<MarvinSegment> findAllSubimages(MarvinImage subimage, MarvinImage original, double similarity){
-		findSubimage = checkAndLoadImagePlugin(flip, "org.marvinproject.image.pattern.findSubimage");
+		findSubimage = checkAndLoadImagePlugin(flip, FindSubimage.class);
 		findSubimage.setAttribute("subimage", subimage);
 		findSubimage.setAttribute("similarity", similarity);
 		MarvinAttributes output = new MarvinAttributes();
@@ -425,7 +471,7 @@ public class MarvinPluginCollection {
 	 * @return				the image segment of the first instance found.
 	 */
 	public static MarvinSegment findSubimage(MarvinImage subimage, MarvinImage original, int startX, int startY, double similarity){
-		findSubimage = checkAndLoadImagePlugin(flip, "org.marvinproject.image.pattern.findSubimage");
+		findSubimage = checkAndLoadImagePlugin(flip, FindSubimage.class);
 		findSubimage.setAttribute("subimage", subimage);
 		findSubimage.setAttribute("similarity", similarity);
 		findSubimage.setAttribute("findAll", false);
@@ -454,7 +500,7 @@ public class MarvinPluginCollection {
 	 * @return						list of image segments containing texts.
 	 */
 	public static List<MarvinSegment> findTextRegions(MarvinImage imageIn, int maxWhiteSpace, int maxFontLineWidth, int minTextWidth, int grayScaleThreshold){
-		findTextRegions = checkAndLoadImagePlugin(findTextRegions, "org.marvinproject.image.pattern.findTextRegions");
+		findTextRegions = checkAndLoadImagePlugin(findTextRegions, FindTextRegions.class);
 		findTextRegions.setAttribute("maxWhiteSpace", maxWhiteSpace);
 		findTextRegions.setAttribute("maxFontLineWidth", maxFontLineWidth);
 		findTextRegions.setAttribute("minTextWidth", minTextWidth);
@@ -483,7 +529,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask			
 	 */
 	public static void emboss(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		emboss = checkAndLoadImagePlugin(emboss, "org.marvinproject.image.color.emboss");
+		emboss = checkAndLoadImagePlugin(emboss, Emboss.class);
 		emboss.process(imageIn, imageOut, mask);
 	}
 	
@@ -496,7 +542,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void flipHorizontally(MarvinImage imageIn, MarvinImage imageOut){
-		flip = checkAndLoadImagePlugin(flip, "org.marvinproject.image.transform.flip");
+		flip = checkAndLoadImagePlugin(flip, Flip.class);
 		flip.setAttribute("flip", "horizontal");
 		flip.process(imageIn, imageOut);
 	}
@@ -507,7 +553,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void flipVertically(MarvinImage imageIn, MarvinImage imageOut){
-		flip = checkAndLoadImagePlugin(flip, "org.marvinproject.image.transform.flip");
+		flip = checkAndLoadImagePlugin(flip, Flip.class);
 		flip.setAttribute("flip", "vertical");
 		flip.process(imageIn, imageOut);
 	}
@@ -516,7 +562,7 @@ public class MarvinPluginCollection {
 	  | FLOODFILL SEGMENTATION
 	  ==============================================================================================*/
 	public static MarvinSegment[] floodfillSegmentation(MarvinImage imageIn){
-		floodfillSegmentation = checkAndLoadImagePlugin(floodfillSegmentation, "org.marvinproject.image.segmentation.floodfillSegmentation");
+		floodfillSegmentation = checkAndLoadImagePlugin(floodfillSegmentation, FloodfillSegmentation.class);
 		floodfillSegmentation.setAttribute("returnType", "MarvinSegment");
 		MarvinAttributes output = new MarvinAttributes();
 		floodfillSegmentation.process(imageIn, null, output);
@@ -524,7 +570,7 @@ public class MarvinPluginCollection {
 	}
 	
 	public static MarvinBlobSegment[] floodfillSegmentationBlob(MarvinImage imageIn){
-		floodfillSegmentation = checkAndLoadImagePlugin(floodfillSegmentation, "org.marvinproject.image.segmentation.floodfillSegmentation");
+		floodfillSegmentation = checkAndLoadImagePlugin(floodfillSegmentation, FloodfillSegmentation.class);
 		floodfillSegmentation.setAttribute("returnType", "MarvinBlobSegment");
 		MarvinAttributes output = new MarvinAttributes();
 		floodfillSegmentation.process(imageIn, null, output);
@@ -552,7 +598,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void gaussianBlur(MarvinImage imageIn, MarvinImage imageOut, int radius, MarvinImageMask mask){
-		gaussianBlur = checkAndLoadImagePlugin(gaussianBlur, "org.marvinproject.image.blur.gaussianBlur");
+		gaussianBlur = checkAndLoadImagePlugin(gaussianBlur, GaussianBlur.class);
 		gaussianBlur.setAttribute("radius", radius);
 		gaussianBlur.process(imageIn, imageOut, mask);
 	}
@@ -584,7 +630,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void grayScale(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		grayScale = checkAndLoadImagePlugin(grayScale, "org.marvinproject.image.color.grayScale");
+		grayScale = checkAndLoadImagePlugin(grayScale, GrayScale.class);
 		grayScale.process(imageIn, imageOut, mask);
 	}
 	
@@ -601,7 +647,7 @@ public class MarvinPluginCollection {
 	 * @param mask				pixel mask
 	 */
 	public static void halftoneCircles(MarvinImage imageIn, MarvinImage imageOut, int circleWidth, int shift, int circlesDistance, MarvinImageMask mask){
-		halftoneCircles = checkAndLoadImagePlugin(halftoneCircles, "org.marvinproject.image.halftone.circles");
+		halftoneCircles = checkAndLoadImagePlugin(halftoneCircles, Circles.class);
 		halftoneCircles.setAttribute("circleWidth", circleWidth);
 		halftoneCircles.setAttribute("shift", shift);
 		halftoneCircles.setAttribute("circlesDistance", circlesDistance);
@@ -629,7 +675,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void halftoneDithering(MarvinImage imageIn, MarvinImage imageOut){
-		halftoneDithering = checkAndLoadImagePlugin(halftoneDithering, "org.marvinproject.image.halftone.dithering");
+		halftoneDithering = checkAndLoadImagePlugin(halftoneDithering, Dithering.class);
 		halftoneDithering.process(imageIn, imageOut);
 	}
 	
@@ -642,7 +688,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void halftoneErrorDiffusion(MarvinImage imageIn, MarvinImage imageOut){
-		halftoneErrorDiffusion = checkAndLoadImagePlugin(halftoneErrorDiffusion, "org.marvinproject.image.halftone.errorDiffusion");
+		halftoneErrorDiffusion = checkAndLoadImagePlugin(halftoneErrorDiffusion, ErrorDiffusion.class);
 		halftoneErrorDiffusion.process(imageIn, imageOut);
 	}
 	
@@ -655,7 +701,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void halftoneRaylanders(MarvinImage imageIn, MarvinImage imageOut){
-		halftoneRylanders = checkAndLoadImagePlugin(halftoneRylanders, "org.marvinproject.image.halftone.rylanders");
+		halftoneRylanders = checkAndLoadImagePlugin(halftoneRylanders, Rylanders.class);
 		halftoneRylanders.process(imageIn, imageOut);
 	}
 	
@@ -670,7 +716,7 @@ public class MarvinPluginCollection {
 	 * @param k				param k
 	 */
 	public static void harrisCorner(MarvinImage imageIn, int matrixSize, int threshold, double k){
-		harris = checkAndLoadImagePlugin(harris, "org.marvinproject.image.corner.harris");
+		harris = checkAndLoadImagePlugin(harris, Harris.class);
 		harris.setAttribute("matrixSize", matrixSize);
 		harris.setAttribute("threshold", threshold);
 		harris.setAttribute("k", k);
@@ -686,7 +732,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void histogramEqualization(MarvinImage imageIn, MarvinImage imageOut){
-		histogramEqualization = checkAndLoadImagePlugin(histogramEqualization, "org.marvinproject.image.equalization.histogramEqualization");
+		histogramEqualization = checkAndLoadImagePlugin(histogramEqualization, HistogramEqualization.class);
 		histogramEqualization.process(imageIn, imageOut);
 	}
 	
@@ -717,7 +763,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void invertColors(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		invertColors = checkAndLoadImagePlugin(invertColors, "org.marvinproject.image.color.invert");
+		invertColors = checkAndLoadImagePlugin(invertColors, Invert.class);
 		invertColors.process(imageIn, imageOut, mask);
 	}
 	
@@ -731,7 +777,7 @@ public class MarvinPluginCollection {
 	 * @param threshold		threshold considering in pixel comparison.
 	 */
 	public static void mergePhotos(List<MarvinImage> images, MarvinImage imageOut, int threshold){
-		mergePhotos = checkAndLoadImagePlugin(mergePhotos, "org.marvinproject.image.combine.mergePhotos");
+		mergePhotos = checkAndLoadImagePlugin(mergePhotos, MergePhotos.class);
 		mergePhotos.setAttribute("threshold", threshold);
 		mergePhotos.process(images, imageOut);	
 	}
@@ -748,7 +794,7 @@ public class MarvinPluginCollection {
 	 * @return				cornerness map
 	 */
 	public static int[][] moravec(MarvinImage imageIn, MarvinImage imageOut, int matrixSize, int threshold){
-		moravec = checkAndLoadImagePlugin(moravec, "org.marvinproject.image.corner.moravec");
+		moravec = checkAndLoadImagePlugin(moravec, Moravec.class);
 		moravec.setAttribute("matrixSize", matrixSize);
 		moravec.setAttribute("threshold", threshold);
 		MarvinAttributes ret = new MarvinAttributes();
@@ -765,7 +811,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void morphologicalBoundary(MarvinImage imageIn, MarvinImage imageOut){
-		morphologicalBoundary = checkAndLoadImagePlugin(morphologicalBoundary, "org.marvinproject.image.morphological.boundary");
+		morphologicalBoundary = checkAndLoadImagePlugin(morphologicalBoundary, Boundary.class);
 		morphologicalBoundary.setAttribute("matrix", boolean_3x3);
 		morphologicalBoundary.process(imageIn, imageOut);
 	}
@@ -777,7 +823,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		operation matrix.
 	 */
 	public static void morphologicalBoundary(MarvinImage imageIn, MarvinImage imageOut, boolean[][] matrix){
-		morphologicalBoundary = checkAndLoadImagePlugin(morphologicalBoundary, "org.marvinproject.image.morphological.boundary");
+		morphologicalBoundary = checkAndLoadImagePlugin(morphologicalBoundary, Boundary.class);
 		morphologicalBoundary.setAttribute("matrix", matrix);
 		morphologicalBoundary.process(imageIn, imageOut);
 	}
@@ -792,7 +838,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		matrix
 	 */
 	public static void morphologicalClosing(MarvinImage imageIn, MarvinImage imageOut, boolean[][] matrix){
-		morphologicalClosing = checkAndLoadImagePlugin(morphologicalClosing, "org.marvinproject.image.morphological.closing");
+		morphologicalClosing = checkAndLoadImagePlugin(morphologicalClosing, Closing.class);
 		morphologicalClosing.setAttribute("matrix", matrix);
 		morphologicalClosing.process(imageIn, imageOut);
 	}
@@ -807,7 +853,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		matrix
 	 */
 	public static void morphologicalDilation(MarvinImage imageIn, MarvinImage imageOut, boolean[][] matrix){
-		morphologicalDilation = checkAndLoadImagePlugin(morphologicalDilation, "org.marvinproject.image.morphological.dilation");
+		morphologicalDilation = checkAndLoadImagePlugin(morphologicalDilation, Dilation.class);
 		morphologicalDilation.setAttribute("matrix", matrix);
 		morphologicalDilation.process(imageIn, imageOut);
 	}
@@ -822,7 +868,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		matrix
 	 */
 	public static void morphologicalErosion(MarvinImage imageIn, MarvinImage imageOut, boolean[][] matrix){
-		morphologicalErosion = checkAndLoadImagePlugin(morphologicalErosion, "org.marvinproject.image.morphological.erosion");
+		morphologicalErosion = checkAndLoadImagePlugin(morphologicalErosion, Erosion.class);
 		morphologicalErosion.setAttribute("matrix", matrix);
 		morphologicalErosion.process(imageIn, imageOut);
 	}
@@ -837,7 +883,7 @@ public class MarvinPluginCollection {
 	 * @param matrix		matrix
 	 */
 	public static void morphologicalOpening(MarvinImage imageIn, MarvinImage imageOut, boolean[][] matrix){
-		morphologicalOpening = checkAndLoadImagePlugin(morphologicalOpening, "org.marvinproject.image.morphological.opening");
+		morphologicalOpening = checkAndLoadImagePlugin(morphologicalOpening, Opening.class);
 		morphologicalOpening.setAttribute("matrix", matrix);
 		morphologicalOpening.process(imageIn, imageOut);
 	}
@@ -851,7 +897,7 @@ public class MarvinPluginCollection {
 	 * @param imageOut		output image
 	 */
 	public static void morphologicalThinning(MarvinImage imageIn, MarvinImage imageOut){
-		morphologicalThinning = checkAndLoadImagePlugin(morphologicalThinning, "org.marvinproject.image.morphological.thinning");
+		morphologicalThinning = checkAndLoadImagePlugin(morphologicalThinning, Thinning.class);
 		morphologicalThinning.process(imageIn, imageOut);
 	}
 	
@@ -867,7 +913,7 @@ public class MarvinPluginCollection {
 	 * @param border		has border?
 	 */
 	public static void mosaic(MarvinImage imageIn, MarvinImage imageOut, String shape, int width, boolean border){
-		mosaic = checkAndLoadImagePlugin(mosaic, "org.marvinproject.image.artistic.mosaic");
+		mosaic = checkAndLoadImagePlugin(mosaic, Mosaic.class);
 		mosaic.setAttribute("shape", shape);
 		mosaic.setAttribute("width", width);
 		mosaic.setAttribute("border", border);
@@ -889,7 +935,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void pixelize(MarvinImage imageIn, MarvinImage imageOut, int squareSide, MarvinImageMask mask){
-		pixelize = checkAndLoadImagePlugin(pixelize, "org.marvinproject.image.blur.pixelize");
+		pixelize = checkAndLoadImagePlugin(pixelize, Pixelize.class);
 		pixelize.setAttribute("squareSide", squareSide);
 		pixelize.process(imageIn, imageOut, mask);
 	}
@@ -913,7 +959,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void prewitt(MarvinImage imageIn, MarvinImage imageOut, double intensity, MarvinImageMask mask){
-		prewitt = checkAndLoadImagePlugin(prewitt, "org.marvinproject.image.edge.prewitt");
+		prewitt = checkAndLoadImagePlugin(prewitt, Prewitt.class);
 		prewitt.setAttribute("intensity", intensity);
 		prewitt.process(imageIn, imageOut, mask);
 	}
@@ -928,7 +974,7 @@ public class MarvinPluginCollection {
 	 * @param shades		number of shades of gray
 	 */
 	public static void quantizationGrayScale(MarvinImage imageIn, MarvinImage imageOut, int shades){
-		quantizationGrayScale = checkAndLoadImagePlugin(quantizationGrayScale, "org.marvinproject.image.quantization.grayScaleQuantization");
+		quantizationGrayScale = checkAndLoadImagePlugin(quantizationGrayScale, GrayScaleQuantization.class);
 		quantizationGrayScale.setAttributes("shades", shades);
 		quantizationGrayScale.process(imageIn, imageOut);
 	}
@@ -952,7 +998,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void roberts(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		roberts = checkAndLoadImagePlugin(roberts, "org.marvinproject.image.edge.roberts");
+		roberts = checkAndLoadImagePlugin(roberts, Roberts.class);
 		roberts.process(imageIn, imageOut, mask);
 	}
 	
@@ -967,7 +1013,7 @@ public class MarvinPluginCollection {
 	 * @param height		new height
 	 */
 	public static void scale(MarvinImage imageIn, MarvinImage imageOut, int width, int height){
-		scale = checkAndLoadImagePlugin(roberts, "org.marvinproject.image.transform.scale");
+		scale = checkAndLoadImagePlugin(roberts, Scale.class);
 		scale.setAttribute("newWidth", width);
 		scale.setAttribute("newHeight", height);
 		scale.process(imageIn, imageOut);
@@ -1019,7 +1065,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask.
 	 */
 	public static void sepia(MarvinImage imageIn, MarvinImage imageOut, int intensity, MarvinImageMask mask){
-		sepia = checkAndLoadImagePlugin(sepia, "org.marvinproject.image.color.sepia");
+		sepia = checkAndLoadImagePlugin(sepia, Sepia.class);
 		sepia.setAttribute("intensity", intensity);
 		sepia.process(imageIn, imageOut, mask);
 	}
@@ -1043,7 +1089,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void sobel(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		sobel = checkAndLoadImagePlugin(sobel, "org.marvinproject.image.edge.sobel");
+		sobel = checkAndLoadImagePlugin(sobel, Sobel.class);
 		sobel.process(imageIn, imageOut, mask);
 	}
 	
@@ -1075,7 +1121,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void skinColorDetection(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		skinColorDetection = checkAndLoadImagePlugin(skinColorDetection, "org.marvinproject.image.color.skinColorDetection");
+		skinColorDetection = checkAndLoadImagePlugin(skinColorDetection, SkinColorDetection.class);
 		skinColorDetection.process(imageIn, imageOut, mask);
 	}
 	
@@ -1089,7 +1135,7 @@ public class MarvinPluginCollection {
 	 * @param threshold		corner estimation threshold
 	 */
 	public static void susanCorner(MarvinImage imageIn, int matrixSize, int threshold){
-		susan = checkAndLoadImagePlugin(susan, "org.marvinproject.image.corner.susan");
+		susan = checkAndLoadImagePlugin(susan, Susan.class);
 		susan.setAttribute("matrixSize", matrixSize);
 		susan.setAttribute("threshold", threshold);
 		susan.process(imageIn, imageIn);
@@ -1122,7 +1168,7 @@ public class MarvinPluginCollection {
 	 * @param mask			pixel mask
 	 */
 	public static void television(MarvinImage imageIn, MarvinImage imageOut, MarvinImageMask mask){
-		television = checkAndLoadImagePlugin(television, "org.marvinproject.image.artistic.television");
+		television = checkAndLoadImagePlugin(television, Television.class);
 		television.process(imageIn, imageOut, mask);
 	}
 	
@@ -1178,7 +1224,7 @@ public class MarvinPluginCollection {
 	 * @param mask				pixel mask
 	 */
 	public static void thresholding(MarvinImage imageIn, MarvinImage imageOut, int threshold, int thresholdRange, MarvinImageMask mask){
-		thresholding = checkAndLoadImagePlugin(thresholding, "org.marvinproject.image.color.thresholding");
+		thresholding = checkAndLoadImagePlugin(thresholding, Thresholding.class);
 		thresholding.setAttribute("threshold",threshold);
 		thresholding.setAttribute("thresholdRange",thresholdRange);
 		thresholding.process(imageIn, imageOut, mask);
@@ -1196,7 +1242,7 @@ public class MarvinPluginCollection {
 	 * @param samplingPixelDistance				1 to process every pixel, higher values to skip pixels in the sampling process.
 	 */
 	public static void thresholdingNeighborhood(MarvinImage imageIn, MarvinImage imageOut, double thresholdPercentageOfAverage, int neighborhoodSide, int samplingPixelDistance){
-		thresholdingNeighborhood = checkAndLoadImagePlugin(thresholding, "org.marvinproject.image.color.thresholdingNeighborhood");
+		thresholdingNeighborhood = checkAndLoadImagePlugin(thresholding, ThresholdingNeighborhood.class);
 		thresholdingNeighborhood.setAttribute("thresholdPercentageOfAverage",thresholdPercentageOfAverage);
 		thresholdingNeighborhood.setAttribute("neighborhoodSide",neighborhoodSide);
 		thresholdingNeighborhood.setAttribute("samplingPixelDistance",samplingPixelDistance);
@@ -1225,17 +1271,26 @@ public class MarvinPluginCollection {
 	 * @return
 	 */
 	public static int[][] watershed(MarvinImage imageIn){
-		watershed = checkAndLoadImagePlugin(watershed, "org.marvinproject.image.transform.watershed");
+		watershed = checkAndLoadImagePlugin(watershed, Watershed.class);
 		MarvinAttributes attr = new MarvinAttributes();
 		thresholding.process(imageIn, imageIn, attr);
 		return (int[][])attr.get("labels");
 	}
 	
-	private static MarvinImagePlugin checkAndLoadImagePlugin(MarvinImagePlugin ref, String pluginCanonicalName){
+
+	private static MarvinImagePlugin checkAndLoadImagePlugin(MarvinImagePlugin ref, Class<? extends MarvinImagePlugin> clazz){
 		// Plug-in already loaded
 		if(ref != null){
 			return ref;
 		}
-		return MarvinPluginLoader.loadImagePlugin(pluginCanonicalName);
+		try{
+			MarvinImagePlugin plugin =  clazz.getConstructor().newInstance();
+			plugin.load();
+			return plugin;
+		} catch(Exception e){
+			/* Not expected to get here */
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
