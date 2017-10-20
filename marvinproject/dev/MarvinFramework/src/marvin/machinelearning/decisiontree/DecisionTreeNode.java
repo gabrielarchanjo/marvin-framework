@@ -44,7 +44,7 @@ public class DecisionTreeNode {
 		if("<=".equals(cond))	return CONDITION.LTE;
 		if(">".equals(cond))	return CONDITION.GT;
 		if(">=".equals(cond))	return CONDITION.GTE;
-		if("==".equals(cond))	return CONDITION.EQ;
+		if("=".equals(cond))	return CONDITION.EQ;
 		if("!=".equals(cond))	return CONDITION.NEQ;
 		return null;
 	}
@@ -122,10 +122,15 @@ public class DecisionTreeNode {
 		
 		Object sValue = map.get(attr);
 		
+		if(sValue == null){
+			throw new RuntimeException(attr+" is null");
+		}
+		
 		if(isNumber(sValue)){
 			return evalNumeric(attr, sValue);
+		} else{
+			return evalText(attr, sValue);
 		}
-		return false;
 	}
 	
 	private boolean evalNumeric(String attr, Object sValue){
@@ -142,6 +147,13 @@ public class DecisionTreeNode {
 			case NEQ:		return n1 != n2;
 		}
 		return false;
+	}
+	
+	private boolean evalText(String attr, Object sValue){
+		String s1 = sValue.toString().trim();
+		String s2 = ((String)value).trim();
+		
+		return s1.equals(s2);
 	}
 	
 	private Double getNumeric(Object sValue){

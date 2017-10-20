@@ -1,5 +1,7 @@
 package marvin.machinelearning.decisiontree;
 
+import java.io.File;
+import java.net.URI;
 import java.util.Map;
 
 import marvin.util.MarvinFileUtils;
@@ -55,7 +57,7 @@ public class DecisionTree {
 		parser.incPosition(1);
 		String cond = parser.getNext(new char[]{' ', '\n', ':'});
 		parser.incPosition(1);
-		String val = parser.getNext(new char[]{' ', '\n', ':'});
+		String val = parser.getNext(new char[]{'\n', ':'});
 		
 		if(cond == null || cond.equals("")){
 			return;
