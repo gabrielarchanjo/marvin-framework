@@ -10,4 +10,8 @@ http://marvinproject.sourceforge.net/
 **DISCUSSION GROUP:**<br/>
 https://groups.google.com/forum/#!forum/marvin-project
 
+# Javascript Version:
+**Site:** https://www.marvinj.org
+
+**Git:** https://github.com/gabrielarchanjo/marvinj
 
