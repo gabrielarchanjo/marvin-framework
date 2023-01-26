@@ -32,7 +32,7 @@ public interface MarvinImagePlugin extends MarvinPlugin
 	 * @param imgOut			output image.
 	 * @param attrOut			output attributes.
 	 * @param mask				mask containing what pixels should be considered.
-	 * @param previewMode		it is or isn´t on preview mode.
+	 * @param previewMode		it is or isn't on preview mode.
 	 */
 	public void process
 	(

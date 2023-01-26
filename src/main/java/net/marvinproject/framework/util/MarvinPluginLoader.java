@@ -23,7 +23,7 @@ public class MarvinPluginLoader {
 	
 //	/**
 //	 * Loads a MarvinPluginImage via MarvinJarLoader
-//	 * @param pluginPath		plug-in´s jar file path.
+//	 * @param pluginPath		plug-ins jar file path.
 //	 * @return 					a loaded MarvinPluginImage.
 //	 */
 //	public static MarvinImagePlugin loadImagePlugin(String pluginPath){
@@ -41,8 +41,8 @@ public class MarvinPluginLoader {
 //	
 //	/**
 //	 * Loads a MarvinPlugin via MarvinJarLoader
-//	 * @param pluginPath	plug-in´s jar file path.
-//	 * @param className		plug-in´s class name.
+//	 * @param pluginPath	plug-ins jar file path.
+//	 * @param className		plug-ins class name.
 //	 * @return
 //	 */
 //	private static MarvinPlugin loadPlugin(String pluginPath, String className){

@@ -34,7 +34,7 @@ public class MarvinImageIO {
 	
 	/**
 	 * Loads a MarvinImage from a filesystem path.
-	 * @param a_filePath	- image´s path
+	 * @param a_filePath	- images path
 	 * @return
 	 */
 	public static MarvinImage loadImage(String a_filePath){

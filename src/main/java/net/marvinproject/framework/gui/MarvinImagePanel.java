@@ -73,8 +73,8 @@ public class MarvinImagePanel extends JPanel{
 	/**
 	 * Instantiates the MarvinImage object and returns its BufferedImage as off-screen 
 	 * drawable image to be used for double buffering. 
-	 * @param width 	image큦 width
-	 * @param height	image큦 width
+	 * @param width 	images width
+	 * @param height	images width
 	 */
 	public Image createImage(int width, int height){
 		image = new MarvinImage(width, height);		
@@ -84,7 +84,7 @@ public class MarvinImagePanel extends JPanel{
 	
 	/**
 	 * Associates a MarvinImage to the image panel.
-	 * @param img	image큦 reference to be associated with the image panel.
+	 * @param img	images reference to be associated with the image panel.
 	 */
 	public void setImage(MarvinImage img){
 		img.update();
@@ -121,7 +121,7 @@ public class MarvinImagePanel extends JPanel{
 	}
 	
 	/**
-	 * Update component큦 graphical representation
+	 * Update components graphical representation
 	 */
 	public void update(){
 		image.update();

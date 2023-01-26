@@ -58,8 +58,8 @@ public abstract class MarvinAbstractPlugin implements MarvinPlugin{
 	
 	/**
 	 * Set an attribute
-	 * @param a_attrName	attribute큦 name
-	 * @param value			attribute큦 value
+	 * @param a_attrName	attributes name
+	 * @param value			attributes value
 	 **/
 	public void setAttribute(String label, Object value){
 		marvinAttributes.set(label, value);
@@ -73,8 +73,8 @@ public abstract class MarvinAbstractPlugin implements MarvinPlugin{
 	}
 	
 	/**
-	 * @param a_attrName	atribute큦 name
-	 * @return the attribute큦 value
+	 * @param a_attrName	attributes name
+	 * @return the attributes value
 	 */
 	public Object getAttribute(String label){
 		return marvinAttributes.get(label);

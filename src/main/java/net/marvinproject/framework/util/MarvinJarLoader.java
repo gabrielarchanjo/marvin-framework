@@ -31,7 +31,7 @@ public class MarvinJarLoader extends ClassLoader {
 	
 	/**
 	 * Constructor
-	 * @param jarPath 	jar file´s path.
+	 * @param jarPath 	jar files path.
 	 */
 	MarvinJarLoader(String jarPath){
 		super(MarvinJarLoader.class.getClassLoader());
@@ -83,7 +83,7 @@ public class MarvinJarLoader extends ClassLoader {
 	
 	/**
 	 * @param entry		JarEntry to be read.
-	 * @returns 		a byte array of the entry´s content.
+	 * @returns 		a byte array of the entry's content.
 	 */
 	public byte[] getEntryBytes(JarEntry entry){
 		int l_size = (int)entry.getSize();
@@ -103,7 +103,7 @@ public class MarvinJarLoader extends ClassLoader {
 	
 	/**
 	 * Find a class specified as parameter. In this case, the class must be found in the Jar
-	 * file. The methods getClass returns a Class object of the specified class whether it´s inside the
+	 * file. The methods getClass returns a Class object of the specified class whether it's inside the
 	 * jar file.
 	 * @param name		class name
 	 * @return 			Class object

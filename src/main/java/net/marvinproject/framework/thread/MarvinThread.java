@@ -85,7 +85,7 @@ public class MarvinThread implements Runnable{
 	}
 	
 	/**
-	 * Thread´s run method.
+	 * Threads run method.
 	 */
 	public void run(){
 		switch(eType){
