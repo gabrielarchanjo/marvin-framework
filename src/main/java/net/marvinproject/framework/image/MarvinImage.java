@@ -637,7 +637,7 @@ public class MarvinImage implements Cloneable {
 	}
 	
 	/**
-	 * Bresenham큦 Line Drawing implementation
+	 * Bresenhams Line Drawing implementation
 	 */
 	public void drawLine(int x0, int y0, int x1, int y1, Color c) {
 		int colorRGB = c.getRGB();
@@ -685,12 +685,12 @@ public class MarvinImage implements Cloneable {
 
 	
 	/**
-	 * Draws a rectangle in the image. It큦 useful for debugging purposes.
-	 * @param x		rect큦 start position in x-axis
-	 * @param y		rect큦 start positioj in y-axis
-	 * @param w		rect큦 width
-	 * @param h		rect큦 height
-	 * @param c		rect큦 color
+	 * Draws a rectangle in the image. It's useful for debugging purposes.
+	 * @param x		rects start position in x-axis
+	 * @param y		rects start positioj in y-axis
+	 * @param w		rects width
+	 * @param h		rects height
+	 * @param c		rects color
 	 */
 	public void drawRect(int x, int y, int w, int h, Color c){
 		int color = c.getRGB();
@@ -732,11 +732,11 @@ public class MarvinImage implements Cloneable {
 	}
 	/**
 	 * Fills a rectangle in the image.
-	 * @param x		rect큦 start position in x-axis
-	 * @param y		rect큦 start positioj in y-axis
-	 * @param w		rect큦 width
-	 * @param h		rect큦 height
-	 * @param c		rect큦 color
+	 * @param x		rects start position in x-axis
+	 * @param y		rects start positioj in y-axis
+	 * @param w		rects width
+	 * @param h		rects height
+	 * @param c		rects color
 	 */
 	public void fillRect(int x, int y, int w, int h, Color c){
 		int color = c.getRGB();

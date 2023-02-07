@@ -68,7 +68,7 @@ public class MarvinAttributes
 
 	/**
 	 * Get an attribute by its name.
-	 * @param name		attribute´s name.
+	 * @param name		attributes name.
 	 * @return the specified attribute as an Object.
 	 */
 	public Object get(String name){
@@ -84,8 +84,8 @@ public class MarvinAttributes
 	}
 
 	/**
-	 * Returns all attributes´ name and value as a String array.
-	 * @return string array with all attributes´ name and value.
+	 * Returns all attributes name and value as a String array.
+	 * @return string array with all attributes name and value.
 	 */
 	public String[] toStringArray(){
 		String key;

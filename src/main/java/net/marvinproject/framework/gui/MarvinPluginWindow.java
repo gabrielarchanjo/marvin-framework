@@ -194,7 +194,7 @@ public class MarvinPluginWindow extends JFrame
 //	
 //	/**
 //	 * Add ComboBox
-//	 * @param id			component´s id.
+//	 * @param id			components id.
 //	 * @param attrID		attribute id.
 //	 * @param items			items array.
 //	 * @param attr			MarvinAttributes object.
@@ -277,7 +277,7 @@ public class MarvinPluginWindow extends JFrame
 //	}
 //	
 //	/**
-//	 * Update the attributes´ value based on the associated components.
+//	 * Update the attributes value based on the associated components.
 //	 */
 //	public void applyValues(){
 //		MarvinPluginWindowComponent filterComp;
@@ -292,8 +292,8 @@ public class MarvinPluginWindow extends JFrame
 //
 //	/**
 //	 * Converts a string to the attribute type.
-//	 * @param value		attribute´s value.
-//	 * @param type		attribute´s type.
+//	 * @param value		attributes value.
+//	 * @param type		attributes type.
 //	 * @return value as the specified type.
 //	 */
 //	public Object stringToType(String value, Object type){

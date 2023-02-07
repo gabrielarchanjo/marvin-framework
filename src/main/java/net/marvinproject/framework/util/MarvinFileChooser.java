@@ -23,7 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * File Chooser.
  * @version 1.0 02/13/08
- * @author Danilo Rosetto Muñoz
+ * @author Danilo Rosetto Muhoz
  */
 public class MarvinFileChooser extends JDialog{	
 	// Constants

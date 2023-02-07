@@ -15,7 +15,7 @@ import net.marvinproject.framework.util.MarvinAttributes;
 
 /**
  * Generic Marvin Plug-in. All application plug-ins must be implement this interface. Currently,
- * it´s empty because Marvin suports only one type of plug-in. Nevertheless, different types of
+ * it's empty because Marvin suports only one type of plug-in. Nevertheless, different types of
  * plug-ins are expected.
  * @version 1.0 02/13/08
  */
@@ -61,7 +61,7 @@ public interface MarvinPlugin{
 	
 	/**
 	 * @param attrName		attribute name
-	 * @return the attribute´s value
+	 * @return the attributes value
 	 */
 	public Object getAttribute(String attrName);
 	
